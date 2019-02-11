@@ -35,18 +35,6 @@ Google [BigQuery](https://en.wikipedia.org/wiki/BigQuery),
 [Oracle](https://en.wikipedia.org/wiki/Oracle_Corporation#Controversies)
 and [Teradata](https://en.wikipedia.org/wiki/Teradata)
 
-## Why PostgreSQL and _Not_ MySQL?
-
-The _good_ news is that almost all of your PostgreSQL knowledge
-is _directly_ transferable to MySQL. Because both use SQL
-[MySQL](https://en.wikipedia.org/wiki/MySQL)
-
-
-The _reason_ MySQL is still _hugely_ popular
-can be summarised by _one_ word: ***WordPress***.
-
-
-
 
 
 # _What_?
@@ -282,3 +270,21 @@ This will group the rows together by the venue_id, count is then performed on ea
 - [PostGIS install](http://postgis.net/install/)
 - [PostGIS docs](http://postgis.net/docs/manual-2.3/)
 - [PostGIS ST_Distance](http://postgis.net/docs/ST_Distance.html)
+
+
+## Why PostgreSQL and _Not_ MySQL?
+
+The _good_ news is that almost all of your PostgreSQL knowledge
+is _directly_ transferable to MySQL. Because both use SQL
+[MySQL](https://en.wikipedia.org/wiki/MySQL)
+
+
+The _reason_ MySQL is still _hugely_ popular
+can be summarised by _one_ word:
+[***WordPress***](https://en.wikipedia.org/wiki/WordPress).
+
+Over **30%** of the 10 million most popular websites use WordPress.
+WordPress runs on the "LAMP" (_Linux Apache **MySQL** PHP_) stack,
+which
+
+## Why _Not_ Use WordPress?
