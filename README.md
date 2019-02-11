@@ -1,8 +1,70 @@
+# Learn PostgreSQL
 
-## learn-postgresql
-Learn how to use PostgreSQL to store your relational data
+Learn how to use PostgreSQL to store your relational data.
+
+<div align="center">
+    <a href="https://www.postgresql.org/about/">
+        <img src="https://user-images.githubusercontent.com/194400/52590350-fa116100-2e38-11e9-9303-c38819493a4e.png" width="700">
+    </a>
+</div>
+<br />
+
+
+# _Why_?
+
+Like it or not, Relational Databases store
+_most_ of the world's structured data.
+
+https://insights.stackoverflow.com/survey/2018/#technology-databases
+![stackoverflow-survey-2018-databases](https://user-images.githubusercontent.com/194400/52594468-80cb3b80-2e43-11e9-867a-eeb4eea9a322.png)
+
+
+https://db-engines.com/en/ranking
+![dbms-ranking](https://user-images.githubusercontent.com/194400/52594416-64c79a00-2e43-11e9-8a61-02af22554802.png)
+
+
+Structured Query Language (SQL)
+is the preferred means of interacting with data at any scale.
+
+Learning how to use a relational database is a foundational skill
+for all of computer science and application development.
+
+Being _proficient_ in SQL will open the door to Data Science with
+[Apache Spark](https://en.wikipedia.org/wiki/Apache_Spark#Spark_SQL),
+Google [BigQuery](https://en.wikipedia.org/wiki/BigQuery),
+[Oracle](https://en.wikipedia.org/wiki/Oracle_Corporation#Controversies)
+and [Teradata](https://en.wikipedia.org/wiki/Teradata)
+
+## Why PostgreSQL and _Not_ MySQL?
+
+The _good_ news is that almost all of your PostgreSQL knowledge
+is _directly_ transferable to MySQL. Because both use SQL
+[MySQL](https://en.wikipedia.org/wiki/MySQL)
+
+
+The _reason_ MySQL is still _hugely_ popular
+can be summarised by _one_ word: ***WordPress***.
+
+
+
+
+
+# _What_?
+
+# _Who_?
+
+Unless you work for [MongoDB](https://en.wikipedia.org/wiki/MongoDB#Security)
+(_or another [NoSQL](https://en.wikipedia.org/wiki/NoSQL) database company_)
+the chance that you will encounter a Relational Database
+and thus benefit from knowing Structured Query Language (SQL)
+in your _career_ as a software engineer tends toward 100%.
+
+
+
+# _How_?
 
 ### Installation
+
 Before you get started with using PostgreSQL, you'll have to install it.
 Follow these steps to get started:
 
