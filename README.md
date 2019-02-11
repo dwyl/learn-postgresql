@@ -1,13 +1,22 @@
 # Learn PostgreSQL
 
-Learn how to use PostgreSQL to store your relational data.
-
 <div align="center">
     <a href="https://www.postgresql.org/about/">
         <img src="https://user-images.githubusercontent.com/194400/52590350-fa116100-2e38-11e9-9303-c38819493a4e.png" width="700">
     </a>
-</div>
 <br />
+[![Build Status](https://img.shields.io/travis/dwyl/todo-list-javascript-tutorial/master.svg?style=flat-square)](https://travis-ci.org/dwyl/todo-list-javascript-tutorial)
+[![codecov.io](https://img.shields.io/codecov/c/github/dwyl/todo-list-javascript-tutorial/master.svg?style=flat-square)](http://codecov.io/github/dwyl/todo-list-javascript-tutorial?branch=master)
+[![Dependencies: None!](https://david-dm.org/dwyl/todo-list-javascript-tutorial/status.svg?style=flat-square)](https://david-dm.org/dwyl/todo-list-javascript-tutorial)
+[![devDependencies Status](https://david-dm.org/dwyl/todo-list-javascript-tutorial/dev-status.svg?style=flat-square)](https://david-dm.org/dwyl/todo-list-javascript-tutorial?type=dev)
+[![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat-square)](https://github.com/dwyl/todo-list-javascript-tutorial/issues)
+<!-- uncomment when ready
+[![HitCount](http://hits.dwyl.io/dwyl/todo-list-javascript-tutorial.svg)](http://hits.dwyl.io/dwyl/todo-list-javascript-tutorial)
+-->
+<br />
+
+    Learn how to use PostgreSQL to store your relational data.
+</div>
 
 
 # _Why_?
