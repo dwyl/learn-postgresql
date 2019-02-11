@@ -1,6 +1,7 @@
+<div align="center">
+
 # Learn PostgreSQL
 
-<div align="center">
     <a href="https://www.postgresql.org/about/">
         <img src="https://user-images.githubusercontent.com/194400/52590350-fa116100-2e38-11e9-9303-c38819493a4e.png" width="700">
     </a>
@@ -15,7 +16,9 @@
 -->
 <br />
 
-    Learn how to use PostgreSQL to store your relational data.
+    Learn how to use PostgreSQL and write SQL to store
+    and fetch your relational data.
+
 </div>
 
 
