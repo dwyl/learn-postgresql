@@ -17,8 +17,8 @@
 -->
 <br />
 
-    Learn how to use PostgreSQL and write SQL to store
-    and fetch your relational data.
+Learn how to use PostgreSQL and SQL to store
+and query your relational data.
 
 </div>
 
@@ -26,7 +26,9 @@
 # _Why_?
 
 Like it or not, Relational Databases store
-_most_ of the world's structured data.
+_most_ of the world's structured data. <br />
+According to the most recent surveys/statistics,
+SQL dominates the world of databases.
 
 https://insights.stackoverflow.com/survey/2018/#technology-databases
 ![stackoverflow-survey-2018-databases](https://user-images.githubusercontent.com/194400/52594468-80cb3b80-2e43-11e9-867a-eeb4eea9a322.png)
@@ -35,24 +37,62 @@ https://insights.stackoverflow.com/survey/2018/#technology-databases
 https://db-engines.com/en/ranking
 ![dbms-ranking](https://user-images.githubusercontent.com/194400/52594416-64c79a00-2e43-11e9-8a61-02af22554802.png)
 
+> _**Note**: you should never adopt a technology
+based on it's **current popularity**,
+always pick the **appropriate tool** for the job
+based on the requirements, constraints and/or availability
+(both of "skill" on your existing team or in the wider community).
+We include these stats to explain that **relational databases**
+are **still** the most widely used **by far** and so
+learning SQL skills is a very **wise investment**_.
+
+## PostgreSQL Runs _Everywhere_ and is _Easy_!
+
+Getting started with PostgreSQL is _easy_,
+(_just follow the steps in this guide and try out the example queries!_)
+
++ Travis-CI (Free) Integration Testing:
+https://docs.travis-ci.com/user/database-setup/#postgresql
++ Heroku PostgreSQL (_Free for MVP_): https://www.heroku.com/postgres
++ AWS RDS Postgres (_good value + high performance_):
+https://aws.amazon.com/rds/postgresql/
++ Google Cloud SQL: https://cloud.google.com/sql/
++ DigitalOcean: https://www.digitalocean.com/products/managed-databases/
++ Linode:
+https://www.linode.com/docs/databases/postgresql/create-a-highly-available-postgresql-cluster-using-patroni-and-haproxy/
++ Azure: https://azure.microsoft.com/en-us/services/postgresql/
+  + Citus: https://techcrunch.com/2019/01/24/microsoft-acquires-citus-data
++ Self-managed high availability cluster: https://github.com/sorintlab/stolon
+
+# _What_?
 
 Structured Query Language (SQL)
 is the preferred means of interacting with data at any scale.
+PostgreSQL is an advanced Relational DataBase Management System ("RDBMS"),
+that
+
+> The _only_ reason MySQL is still more widely used than PostgreSQL
+can be summarised in *one word*: **WordPress**.
+
+Building your app with PostgreSQL is
 
 Learning how to use a relational database is a foundational skill
 for all of computer science and application development.
 
 Being _proficient_ in SQL will open the door to Data Science with
+[SQL-on-Hadoop](https://mapr.com/why-hadoop/sql-hadoop/sql-hadoop-details/)
 [Apache Spark](https://en.wikipedia.org/wiki/Apache_Spark#Spark_SQL),
 Google [BigQuery](https://en.wikipedia.org/wiki/BigQuery),
 [Oracle](https://en.wikipedia.org/wiki/Oracle_Corporation#Controversies)
-and [Teradata](https://en.wikipedia.org/wiki/Teradata)
-
-
-
-# _What_?
+and [Teradata](https://en.wikipedia.org/wiki/Teradata).
+In short, get good at SQL!
 
 # _Who_?
+
+_Everyone_ building _any_ application that stores data should learn SQL.
+If you are _tempted_ to use MongoDB as your _primary_ data store,
+read this:
+https://www.theguardian.com/info/2018/nov/30/bye-bye-mongo-hello-postgres
 
 Unless you work for [MongoDB](https://en.wikipedia.org/wiki/MongoDB#Security)
 (_or another [NoSQL](https://en.wikipedia.org/wiki/NoSQL) database company_)
@@ -60,6 +100,14 @@ the chance that you will encounter a Relational Database
 and thus benefit from knowing Structured Query Language (SQL)
 in your _career_ as a software engineer tends toward 100%.
 
+If you are _tempted_ by MongoDB because of the "MEAN" stack,
+by all means dive into using it. We have been there and seen the appeal.
+But
+MongoDB is mean to be a "document database" so it _should_ be _ideal_
+for use in a CMS. If you have comparatively small amount of content
+and not much
+Also MongoDB is _insecure_ by **`default`**
+https://en.wikipedia.org/wiki/MongoDB#Security ...
 
 
 # _How_?
@@ -262,7 +310,8 @@ SELECT cities.*, country_name
   ON cities.country_code = countries.country_code;
 ```
 
-This will select all of the columns in both the countries and cities tables the data, the rows are matched up by country_code.
+This will select all of the columns in both the countries
+and cities tables the data, the rows are matched up by `country_code`.
 
 **Grouping**
 You can put rows into groups where the group is defined by a shared value in a particular column.
@@ -273,7 +322,8 @@ SELECT venue_id, count(*)
   GROUP BY venue_id;
 ```
 
-This will group the rows together by the venue_id, count is then performed on each of the groups.
+This will group the rows together by the venue_id,
+count is then performed on each of the groups.
 
 ### Learning Resources
 
@@ -288,8 +338,23 @@ This will group the rows together by the venue_id, count is then performed on ea
 ## Why PostgreSQL and _Not_ MySQL?
 
 The _good_ news is that almost all of your PostgreSQL knowledge
-is _directly_ transferable to MySQL. Because both use SQL
-[MySQL](https://en.wikipedia.org/wiki/MySQL)
+is _directly_ transferable to [MySQL](https://en.wikipedia.org/wiki/MySQL).
+Since _both_ use SQL as the language
+for interacting with the database,
+the time you invest in learning PostgreSQL
+and building SQL skills is a hugely valuable.
+
+Learning how to _run_ means you also know how to _walk_.
+PostgreSQL might _feel_ "more difficult"
+in the same way that , but the principals are all the same.
+Just stick with it and keep asking questions until it all "makes sense".
+If you need to _apply_ your SQL skills to MySQL, MS SQL or MariaDB,
+it will only take you a few minutes to adapt to it.
+
+It's very much like riding a bicycle.
+Once you know how to balance, pedal and steer,
+your skills transfer to other bicycles.
+
 
 
 The _reason_ MySQL is still _hugely_ popular
@@ -298,6 +363,43 @@ can be summarised by _one_ word:
 
 Over **30%** of the 10 million most popular websites use WordPress.
 WordPress runs on the "LAMP" (_Linux Apache **MySQL** PHP_) stack,
-which
+which means that people are using MySQL by _`default`_
+not _conscious enlightenment_.
++ https://www.whoishostingthis.com/compare/wordpress/stats
++ https://w3techs.com/technologies/overview/content_management/all
+
 
 ## Why _Not_ Use WordPress?
+
+WordPress is _unquestionably_ a good CMS and blogging platform
+that helps millions of people/businesses publish online.
+Sadly, it's not secure by _default_ and when a vulnerability is discovered,
+it gets exploited en-mass very quickly.
+Yes, WordPress can be
+["Hardened"](https://codex.wordpress.org/Hardening_WordPress)
+but that is _usually_ not the _first_ thing on people's todo list
+when launching a website or blog.
+The result is that _thousands_ of WordPress websites get hacked
+each time a patch is released e.g:
+https://www.zdnet.com/article/thousands-of-wordpress-sites-backdoored-with-malicious-code
+and it creates a maintenance headache
+for the person/people _responsible_ for the site.
+We're not saying you (_or anyone else_) should not use WordPress,
+just make sure you follow the the latest "best practice" if you do.
+(_We have been "burned" by it through no fault of our own...
+and would not touch it again with a barge pole!
+There are **much** more **secure** and **performant** options!_)
+
+### What About NoSQL Databases/Datastores Like ElasticSearch and Redis?
+
+@dwyl we are _huge_ fans of _special-purpose_ data storage/retrieval systems.
+We have used _several_ NoSQL databases including CouchDB, ElasticSearch,
+MongoDB, Neo4J and Redis.
+Of these we _recommend_ ElasticSearch for full-text search
+and Redis for in-momory datasets and caching. see:
+
++ [github.com/dwyl/learn-**elasticsearch**](https://github.com/dwyl/learn-elasticsearch)
++ [github.com/dwyl/learn-**redis**](https://github.com/dwyl/learn-redis)
+
+However as a "primary" datastore with a robust query language,
+we feel PostgreSQL is the _clear_ winner as a "first" database.
