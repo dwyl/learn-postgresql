@@ -25,6 +25,8 @@ and query your relational data.
 
 # _Why_?
 
+Helping people store, retrieve and derive insights from data
+is the essence of _all_ software applications.
 Like it or not, Relational Databases store
 _most_ of the world's structured data. <br />
 According to the most recent surveys/statistics,
@@ -90,9 +92,6 @@ In short, get good at SQL!
 # _Who_?
 
 _Everyone_ building _any_ application that stores data should learn SQL.
-If you are _tempted_ to use MongoDB as your _primary_ data store,
-read this:
-https://www.theguardian.com/info/2018/nov/30/bye-bye-mongo-hello-postgres
 
 Unless you work for [MongoDB](https://en.wikipedia.org/wiki/MongoDB#Security)
 (_or another [NoSQL](https://en.wikipedia.org/wiki/NoSQL) database company_)
@@ -100,14 +99,36 @@ the chance that you will encounter a Relational Database
 and thus benefit from knowing Structured Query Language (SQL)
 in your _career_ as a software engineer tends toward 100%.
 
-If you are _tempted_ by MongoDB because of the "MEAN" stack,
-by all means dive into using it. We have been there and seen the appeal.
-But
-MongoDB is mean to be a "document database" so it _should_ be _ideal_
-for use in a CMS. If you have comparatively small amount of content
-and not much
-Also MongoDB is _insecure_ by **`default`**
+If you are _tempted_ to use MongoDB as your _primary_ data store,
+read this:
+https://www.theguardian.com/info/2018/nov/30/bye-bye-mongo-hello-postgres
+MongoDB is _meant_ to be a "document-oriented database",
+so it should be _perfect_ for a CMS (_document content_).
+And yet, after years of _trying_ to make it work,
+the _highly_ competent engineers at The Guardian
+decided it wasn't worth the hassle and switched to PostgreSQL to _great_ result!
+Read the Hacker News thread: https://news.ycombinator.com/item?id=18717168
+
+If you are _tempted_ by MongoDB because of the "***MEAN***" **stack**,
+by all means dive into trying it. We have been there and seen the appeal.
+e.g: https://github.com/dwyl/mongo-search ...
+(_PostgreSQL has **much better** full-text search or use ElasticSearch!_)
+However we _urge_ you to understand
+that the _benefit_ of getting _started_ fast
+(_because your MongoDB records don't have a pre-defined schema_)
+will _quickly_ wear off when queries become convoluted and _slow_
+(_because there are no **real** way to do multiple "JOINs"
+and index optimisation is laborious_).
+
+Another important factor
+(_for us @dwyl because we are
+  [security](https://github.com/dwyl/learn-security/)-conscious_)
+is the fact that MongoDB is _insecure_ by **`default`** see:
 https://en.wikipedia.org/wiki/MongoDB#Security ...
+We cannot stand the idea of insecurely storing _anyone's_ data,
+and PostgreSQL makes it _easy_ to add advanced security, access controls
+table-level permissions and field-level data encryption.
+
 
 
 # _How_?
