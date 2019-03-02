@@ -29,11 +29,17 @@ and query your data.
 # _Why_?
 
 Helping people store, retrieve and derive insights from data
-is the essence of _all_ software applications.
+is the essence of _all_ software applications. <br />
+
+## SQL is _Everywhere_
+
 Like it or not, Relational Databases store
-_most_ of the world's structured data. <br />
-According to the most recent surveys/statistics,
-SQL dominates the world of databases.
+_most_ of the world's structured data
+and Structured Query Language (SQL)
+is _by far_ the most frequent way of retrieving the data.<br />
+
+According to the most _recent_ surveys/statistics,
+SQL _still_ dominates the world of databases.
 
 https://insights.stackoverflow.com/survey/2018/#technology-databases
 ![stackoverflow-survey-2018-databases](https://user-images.githubusercontent.com/194400/52594468-80cb3b80-2e43-11e9-867a-eeb4eea9a322.png)
@@ -49,16 +55,20 @@ based on the requirements, constraints and/or availability
 (both of "skill" on your existing team or in the wider community).
 We include these stats to explain that **relational databases**
 are **still** the most widely used **by far** and so
-learning SQL skills is a very **wise investment**_.
+learning SQL skills is a very **wise investment**
+both as an **individual** and for your **team** or **organisation**._
 
-## PostgreSQL Runs _Everywhere_ and is _Easy_!
+
+## PostgreSQL is _Easy_ to Learn and it Runs _Everywhere_!
 
 Getting started with PostgreSQL is _easy_,
-(_just follow the steps in this guide and try out the example queries!_)
+(_just follow the steps in this guide and try out the example queries!_) <br />
+When you are ready to _deploy_ your app, you are in safe hands,
+PostgreSQL runs _everywhere_:
 
-+ Travis-CI (Free) Integration Testing:
++ **Travis-CI** (free) Integration Testing:
 https://docs.travis-ci.com/user/database-setup/#postgresql
-+ Heroku PostgreSQL (_Free for MVP_): https://www.heroku.com/postgres
++ **Heroku** PostgreSQL (_free for MVP: 10k rows_): https://www.heroku.com/postgres
 + AWS RDS Postgres (_good value + high performance_):
 https://aws.amazon.com/rds/postgresql/
 + Google Cloud SQL: https://cloud.google.com/sql/
@@ -71,15 +81,58 @@ https://www.linode.com/docs/databases/postgresql/create-a-highly-available-postg
 
 # _What_?
 
+This tutorial is going to cover 5 areas:
+
+1. _What_ is PostgreSQL?
+2. _How_ do I get _started_ with PostgreSQL? (_a fully functioning example!_)
+3. What is Structured Query Language (SQL)? (_lots of example queries!_)
+4. _How_ do I write my _own_ SQL Queries?
+5. _How_ do I deploy my own PostgreSQL-based Application?
+
+Once you have covered these areas,
+you will _know_ if PostgreSQL
+is "right" for you,
+or if you need to keep looking for a different way
+to store data.
+
+Let's dive in!
+
+## 1. What is PostgreSQL?
+
+PostgreSQL (_often shortened to simply "**Postgres**"_)
+is an advanced
+**R**elational **D**ataBase **M**anagement **S**ystem ("RDBMS"),
+that lets you _efficiently_ and _securely_ store _any_ type of data.
+We will _explain_ "Relational Database" in the context
+of our _example_ below,
+so don't worry if it sounds like a buzzword soup.
+
+Postgres has an emphasis on standards compliance and extensibility
+which means there are many plugins you can use to enhance it
+like [PostGIS](https://postgis.net) for mapping applications
+and entire projects built on top of it like
+[TimescaleDB](https://www.timescale.com/)
+(_a time-series database perfect for analytics_)
+and [AgensGraph](https://bitnine.net/)
+(_a graph database, great for modelling networks e.g a "social graph"_).
+
+
 Structured Query Language (SQL)
-is the preferred means of interacting with data at any scale.
-PostgreSQL is an advanced Relational DataBase Management System ("RDBMS"),
-that
+is the preferred means of interacting with data at any scale. <br />
 
-> The _only_ reason MySQL is still more widely used than PostgreSQL
+> The _only_ reason MySQL is still more widely used than Postgres
 can be summarised in *one word*: **WordPress**.
-
-Building your app with PostgreSQL is
+> WordPress has a firm grip on the CMS-based website market
+and it shows no sign of slowing down.
+> If your goal is to build CMS-based websites,
+or the company you _already_ work for uses WordPress,
+you should go for it!
+> If you prefere a more _general_ introduction to SQL,
+> follow _this_ tutorial!
+> The knowledge you will gain by learning Postgres is 95%+
+"_transferable_" to other SQL databases so don't worry about
+the differences between MySQL and Postgres for now.
+If you're curious, read: https://hackr.io/blog/postgresql-vs-mysql
 
 Learning how to use a relational database is a foundational skill
 for all of computer science and application development.
@@ -90,11 +143,14 @@ Being _proficient_ in SQL will open the door to Data Science with
 Google [BigQuery](https://en.wikipedia.org/wiki/BigQuery),
 [Oracle](https://en.wikipedia.org/wiki/Oracle_Corporation#Controversies)
 and [Teradata](https://en.wikipedia.org/wiki/Teradata).
-In short, get good at SQL!
+In short, get _really_ good at SQL! It's _very_ useful.
 
 # _Who_?
 
 _Everyone_ building _any_ application that stores data should learn SQL.
+
+<!-- I'm undecided on the following section ...
+I don't want to be seen to be "bashing" MongoDB ...
 
 Unless you work for [MongoDB](https://en.wikipedia.org/wiki/MongoDB#Security)
 (_or another [NoSQL](https://en.wikipedia.org/wiki/NoSQL) database company_)
@@ -115,7 +171,10 @@ Read the Hacker News thread: https://news.ycombinator.com/item?id=18717168
 If you are _tempted_ by MongoDB because of the "***MEAN***" **stack**,
 by all means dive into trying it. We have been there and seen the appeal.
 e.g: https://github.com/dwyl/mongo-search ...
-(_PostgreSQL has **much better** full-text search or use ElasticSearch!_)
+(_We learned the "hard way"
+that Searching MongoDB was slow and inconsistent,
+PostgreSQL has **much better** full-text search
+or use ElasticSearch!_)
 However we _urge_ you to understand
 that the _benefit_ of getting _started_ fast
 (_because your MongoDB records don't have a pre-defined schema_)
@@ -132,7 +191,7 @@ We cannot stand the idea of insecurely storing _anyone's_ data,
 and PostgreSQL makes it _easy_ to add advanced security, access controls
 table-level permissions and field-level data encryption.
 
-
+-->
 
 # _How_?
 
