@@ -2,9 +2,16 @@
 
 # Learn PostgreSQL
 
+Learn how to use PostgreSQL
+and Structured Query Language (SQL) to store
+and query your data.
+
+<br />
+
 <a href="https://www.postgresql.org/about/">
   <img src="https://user-images.githubusercontent.com/194400/52590350-fa116100-2e38-11e9-9303-c38819493a4e.png" width="700">
 </a>
+
 <br />
 
 [![Build Status](https://img.shields.io/travis/dwyl/todo-list-javascript-tutorial/master.svg?style=flat-square)](https://travis-ci.org/dwyl/todo-list-javascript-tutorial)
@@ -15,10 +22,6 @@
 <!-- uncomment when ready
 [![HitCount](http://hits.dwyl.io/dwyl/todo-list-javascript-tutorial.svg)](http://hits.dwyl.io/dwyl/todo-list-javascript-tutorial)
 -->
-<br />
-
-Learn how to use PostgreSQL and SQL to store
-and query your relational data.
 
 </div>
 
