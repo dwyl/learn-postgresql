@@ -1,0 +1,35 @@
+{
+  "name": "learn-postgresql",
+  "version": "1.0.0",
+  "description": "PostgreSQL Tutorial",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dwyl/learn-postgresql.git"
+  },
+  "keywords": [],
+  "author": "dwyl & friends",
+  "license": "GPL-2.0",
+  "bugs": {
+    "url": "https://github.com/dwyl/learn-postgresql/issues"
+  },
+  "homepage": "https://github.com/dwyl/learn-postgresql#readme",
+  "dependencies": {
+    "env2": "^2.2.0",
+    "pg": "^7.8.1",
+    "pg-escape": "^0.2.0"
+  },
+  "devDependencies": {
+    "faster": "^3.5.1",
+    "istanbul": "^0.4.5",
+    "nodemon": "^1.11.0",
+    "tap-spec": "^4.1.1",
+    "tape": "^4.6.3"
+  }
+}
