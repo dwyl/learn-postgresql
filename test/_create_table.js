@@ -1,4 +1,4 @@
-require('env2')('.env'); // see: https://github.com/dwyl/env2
+var DBURL = process.env.DATABASE_URL || "postgres://postgres:@localhost/test";
 var assert = require('assert');
 var pg = require('pg');
 
@@ -7,7 +7,7 @@ var pg = require('pg');
  * @param  {Function} callback called if/when the SQL script succeeds!
  */
 function create_tables (callback) {
-  var client = new pg.Client(process.env.DATABASE_URL);
+  var client = new pg.Client(DBURL);
   client.connect(function(err) {
     if (err) {
       console.log(' - - - - - - - - -err:')
@@ -15,7 +15,7 @@ function create_tables (callback) {
       console.log('- - - - - - - - - - - - - - - - - - - ');
       assert(!err); // "die" if we cannot connect to the database!
     }
-    var file = require('path').resolve('./server/database_setup.sql');
+    var file = require('path').resolve('./schema.sql');
     var query = require('fs').readFileSync(file, 'utf8').toString();
     // console.log('\n', query);
     client.query(query, function(err, result) {
