@@ -28,8 +28,8 @@
   "devDependencies": {
     "faster": "^3.5.1",
     "istanbul": "^0.4.5",
-    "nodemon": "^1.11.0",
-    "tap-spec": "^4.1.1",
-    "tape": "^4.6.3"
+    "nodemon": "^1.18.10",
+    "tap-spec": "^5.0.0",
+    "tape": "^4.10.1"
   }
 }
