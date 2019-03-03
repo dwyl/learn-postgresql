@@ -1,17 +1,16 @@
 language: node_js
 node_js:
-  - 10
+  - "node"
 sudo: false
 dist: trusty
 # services:
 #   - postgresql
 addons:
-  postgresql: "11"
+  postgresql: "9.6"
 before_install:
   - psql -c 'create database test;' -U postgres
 after_success:
-  - pip install --user codecov
-  - codecov --file coverage/lcov.info --disable search
+  - bash <(curl -s https://codecov.io/bash)
 env:
   global:
     - DATABASE_URL=postgres://postgres:@localhost/test
