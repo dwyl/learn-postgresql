@@ -1,7 +1,7 @@
 -- echo-all
 -- first drop test tables from previous session so we have a clean database */
-DROP SCHEMA public cascade; /* http://stackoverflow.com/a/13823560/1148249 */
-CREATE SCHEMA IF NOT EXISTS public;
+-- DROP SCHEMA public cascade; /* http://stackoverflow.com/a/13823560/1148249 */
+-- CREATE SCHEMA IF NOT EXISTS public;
 -- DROP DATABASE IF EXISTS codeface;
 -- CREATE DATABASE codeface;
 /* create the people table */
