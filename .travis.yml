@@ -3,7 +3,7 @@ node_js:
   - "node"
 env:
   global:
-    - DATABASE_URL=postgres://postgres:@localhost/test
+    - DATABASE_URL=postgres://postgres:@localhost/codeface
     - NODE_ENV=TEST
 services:
   - postgresql
