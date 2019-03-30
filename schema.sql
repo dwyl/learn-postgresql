@@ -33,8 +33,41 @@ CREATE TABLE IF NOT EXISTS "followers" (
 );
 
 CREATE TABLE IF NOT EXISTS "orgs" (
-	"inserted_at" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-	"id" SERIAL PRIMARY KEY,
-	"url" VARCHAR(50),
-	"username" VARCHAR(50) NOT NULL UNIQUE
-)
+  "inserted_at" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  "id" SERIAL PRIMARY KEY,
+  "url" VARCHAR(50),
+  "username" VARCHAR(50) NOT NULL UNIQUE
+);
+
+INSERT INTO orgs (url, username)
+  SELECT url, username FROM orgs
+  UNION
+  VALUES (
+    'dwyl.com',
+    'dwyl'
+  )
+  EXCEPT
+  SELECT url, username FROM orgs;
+
+
+CREATE TABLE IF NOT EXISTS "members" (
+  "inserted_at" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  "person_id" integer REFERENCES people (id),
+    CONSTRAINT "members_fk0"
+    FOREIGN KEY ("person_id")
+    REFERENCES people (id),
+  "org_id" integer REFERENCES orgs (id),
+    CONSTRAINT "members_fk1"
+    FOREIGN KEY ("org_id")
+    REFERENCES orgs (id)
+);
+
+INSERT INTO members (person_id, org_id)
+  SELECT person_id, org_id FROM orgs
+  UNION
+  VALUES (
+    1,
+    1
+  )
+  EXCEPT
+  SELECT person_id, org_id FROM orgs;
