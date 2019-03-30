@@ -96,13 +96,13 @@ INSERT INTO members (person_id, org_id)
 CREATE TABLE "repos" (
 	"inserted_at" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   "id" SERIAL PRIMARY KEY,
-	"name" VARCHAR(255) NOT NULL,
+	"name" VARCHAR(255) NOT NULL, -- know what the char limit is for a repo name?
 	"person_id" INT REFERENCES people (id), -- can be NULL if repo belongs to org.
     CONSTRAINT "repos_fk0"
     FOREIGN KEY ("person_id")
     REFERENCES people (id),
 	"org_id" INT REFERENCES orgs (id), -- this can be NULL if repo is personal.
-    CONSTRAINT "members_fk1"
+    CONSTRAINT "repos_fk1"
     FOREIGN KEY ("org_id")
     REFERENCES orgs (id)
 );
