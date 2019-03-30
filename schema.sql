@@ -20,6 +20,17 @@ INSERT INTO people (name, username, company)
   EXCEPT
   SELECT name, username, company FROM people;
 
+INSERT INTO people (name, username, company)
+  SELECT name, username, company FROM people
+  UNION
+  VALUES (
+    'Ron Swanson',
+    'dukesilver',
+    'OffermanWood'
+  )
+  EXCEPT
+  SELECT name, username, company FROM people;
+
 CREATE TABLE IF NOT EXISTS "followers" (
   "inserted_at" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   "follower_id" INT REFERENCES people (id),
@@ -31,6 +42,16 @@ CREATE TABLE IF NOT EXISTS "followers" (
     FOREIGN KEY ("leader_id")
     REFERENCES people (id)
 );
+
+INSERT INTO followers (follower_id, leader_id)
+  SELECT follower_id, leader_id FROM followers
+  UNION
+  VALUES (
+    2,
+    1
+  )
+  EXCEPT
+  SELECT follower_id, leader_id FROM followers;
 
 CREATE TABLE IF NOT EXISTS "orgs" (
   "inserted_at" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
