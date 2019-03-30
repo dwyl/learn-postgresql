@@ -1,16 +1,12 @@
--- echo-all
--- first drop test tables from previous session so we have a clean database */
--- DROP SCHEMA public cascade; /* http://stackoverflow.com/a/13823560/1148249 */
--- CREATE SCHEMA IF NOT EXISTS public;
--- DROP DATABASE IF EXISTS codeface;
--- CREATE DATABASE codeface;
-/* create the people table */
-CREATE TABLE IF NOT EXISTS people (
-  id SERIAL PRIMARY KEY,
-  inserted_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  name VARCHAR(100) DEFAULT NULL,
-  username VARCHAR(50) DEFAULT NULL,
-  uid INT DEFAULT NULL
+-- MVP Schema:
+
+CREATE TABLE IF NOT EXISTS "people" (
+	"inserted_at" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	"id" SERIAL PRIMARY KEY,
+	"name" VARCHAR(50) DEFAULT NULL,
+	"username" VARCHAR(50) NOT NULL UNIQUE,
+	"company" VARCHAR(50) DEFAULT NULL,
+  "uid" INT DEFAULT NULL -- the person's github id e.g: 4185328
 );
 
 /* insert a person into the people table if it does not already exist */
