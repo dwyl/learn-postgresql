@@ -93,7 +93,7 @@ INSERT INTO members (person_id, org_id)
   EXCEPT
   SELECT person_id, org_id FROM members;
 
-CREATE TABLE "repos" (
+CREATE TABLE IF NOT EXISTS "repos" (
 	"inserted_at" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   "id" SERIAL PRIMARY KEY,
 	"name" VARCHAR(255) NOT NULL, -- know what the char limit is for a repo name?
@@ -105,4 +105,16 @@ CREATE TABLE "repos" (
     CONSTRAINT "repos_fk1"
     FOREIGN KEY ("org_id")
     REFERENCES orgs (id)
+);
+
+CREATE TABLE IF NOT EXISTS "stars" (
+	"inserted_at" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  "person_id" INT REFERENCES people (id), -- can be NULL if repo belongs to org.
+    CONSTRAINT "stars_fk0"
+    FOREIGN KEY ("person_id")
+    REFERENCES people (id),
+	"repo_id" INT REFERENCES repos (id), -- this can be NULL if repo is personal.
+    CONSTRAINT "stars_fk1"
+    FOREIGN KEY ("repo_id")
+    REFERENCES repo (id)
 );
