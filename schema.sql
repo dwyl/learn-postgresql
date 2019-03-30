@@ -21,13 +21,20 @@ INSERT INTO people (name, username, company)
   SELECT name, username, company FROM people;
 
 CREATE TABLE IF NOT EXISTS "followers" (
-	"inserted_at" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-	"follower_id" INT REFERENCES people (id),
-    CONSTRAINT "followers_fk1"
+  "inserted_at" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  "follower_id" INT REFERENCES people (id),
+    CONSTRAINT "followers_fk0"
     FOREIGN KEY ("follower_id")
     REFERENCES people (id),
   "leader_id" INT REFERENCES people (id),
-    CONSTRAINT "followers_fk2"
+    CONSTRAINT "followers_fk1"
     FOREIGN KEY ("leader_id")
     REFERENCES people (id)
 );
+
+CREATE TABLE IF NOT EXISTS "orgs" (
+	"inserted_at" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	"id" SERIAL PRIMARY KEY,
+	"url" VARCHAR(50),
+	"username" VARCHAR(50) NOT NULL UNIQUE
+)
