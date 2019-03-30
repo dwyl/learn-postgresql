@@ -19,13 +19,13 @@ INSERT INTO people (name, username)
   EXCEPT
   SELECT name, username FROM people;
 
-CREATE TABLE "followers" (
+CREATE TABLE IF NOT EXISTS "followers" (
 	"inserted_at" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-	"follower_id" integer(10) NOT NULL
+	"follower_id" integer(10) NOT NULL REFERENCES "people"("id")
     CONSTRAINT "followers_fk0"
     FOREIGN KEY ("follower_id")
-    REFERENCES "people"("id")
-	"leader_id" integer(10) NOT NULL
+    REFERENCES "people"("id"),
+	"leader_id" integer(10) NOT NULL REFERENCES "people"("id")
     CONSTRAINT "followers_fk1"
     FOREIGN KEY ("leader_id")
     REFERENCES "people"("id")
