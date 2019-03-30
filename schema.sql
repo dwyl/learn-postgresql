@@ -1,5 +1,3 @@
--- MVP Schema:
-
 CREATE TABLE IF NOT EXISTS "people" (
 	"inserted_at" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	"id" SERIAL PRIMARY KEY,
@@ -20,3 +18,15 @@ INSERT INTO people (name, username)
   )
   EXCEPT
   SELECT name, username FROM people;
+
+CREATE TABLE "followers" (
+	"inserted_at" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	"follower_id" integer(10) NOT NULL
+    CONSTRAINT "followers_fk0"
+    FOREIGN KEY ("follower_id")
+    REFERENCES "people"("id")
+	"leader_id" integer(10) NOT NULL
+    CONSTRAINT "followers_fk1"
+    FOREIGN KEY ("leader_id")
+    REFERENCES "people"("id")
+)
