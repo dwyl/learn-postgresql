@@ -116,5 +116,5 @@ CREATE TABLE IF NOT EXISTS "stars" (
 	"repo_id" INT REFERENCES repos (id), -- this can be NULL if repo is personal.
     CONSTRAINT "stars_fk1"
     FOREIGN KEY ("repo_id")
-    REFERENCES repo (id)
+    REFERENCES repos (id)
 );
