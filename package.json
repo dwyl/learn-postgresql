@@ -7,6 +7,7 @@
     "test": "test"
   },
   "scripts": {
+    "create": "psql -U postgres -d codeface -a -f schema.sql",
     "test": "node test/_create_table.js"
   },
   "repository": {
@@ -28,6 +29,7 @@
     "faster": "^3.5.1",
     "istanbul": "^0.4.5",
     "nodemon": "^1.18.10",
+    "ordem": "^1.0.6",
     "tap-spec": "^5.0.0",
     "tape": "^4.10.1"
   }
