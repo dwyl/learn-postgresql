@@ -84,11 +84,11 @@ CREATE TABLE IF NOT EXISTS "members" (
 );
 
 INSERT INTO members (person_id, org_id)
-  SELECT person_id, org_id FROM orgs
+  SELECT person_id, org_id FROM members
   UNION
   VALUES (
     1,
     1
   )
   EXCEPT
-  SELECT person_id, org_id FROM orgs;
+  SELECT person_id, org_id FROM members;
