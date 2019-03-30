@@ -73,11 +73,11 @@ INSERT INTO orgs (url, username)
 
 CREATE TABLE IF NOT EXISTS "members" (
   "inserted_at" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  "person_id" integer REFERENCES people (id),
+  "person_id" INT REFERENCES people (id),
     CONSTRAINT "members_fk0"
     FOREIGN KEY ("person_id")
     REFERENCES people (id),
-  "org_id" integer REFERENCES orgs (id),
+  "org_id" INT REFERENCES orgs (id),
     CONSTRAINT "members_fk1"
     FOREIGN KEY ("org_id")
     REFERENCES orgs (id)
@@ -92,3 +92,17 @@ INSERT INTO members (person_id, org_id)
   )
   EXCEPT
   SELECT person_id, org_id FROM members;
+
+CREATE TABLE "repos" (
+	"inserted_at" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  "id" SERIAL PRIMARY KEY,
+	"name" VARCHAR(255) NOT NULL,
+	"person_id" INT REFERENCES people (id), -- can be NULL if repo belongs to org.
+    CONSTRAINT "repos_fk0"
+    FOREIGN KEY ("person_id")
+    REFERENCES people (id),
+	"org_id" INT REFERENCES orgs (id), -- this can be NULL if repo is personal.
+    CONSTRAINT "members_fk1"
+    FOREIGN KEY ("org_id")
+    REFERENCES orgs (id)
+);
