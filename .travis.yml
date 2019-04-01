@@ -9,6 +9,5 @@ services:
   - postgresql
 before_install:
   - psql -c 'CREATE DATABASE codeface;' -U postgres
-  - npm run create
 after_success:
   - bash <(curl -s https://codecov.io/bash)
