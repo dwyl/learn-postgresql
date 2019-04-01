@@ -4,7 +4,8 @@ CREATE TABLE IF NOT EXISTS "people" (
 	"name" VARCHAR(50) DEFAULT NULL,
 	"username" VARCHAR(50) NOT NULL UNIQUE,
 	"company" VARCHAR(50) DEFAULT NULL,
-  "uid" INT DEFAULT NULL -- the person's GitHub uid e.g: 4185328
+  "uid" INT DEFAULT NULL, -- the person's GitHub uid e.g: 4185328
+  "location" VARCHAR(100) DEFAULT NULL
 );
 
 /* insert a person into the people table if it does not already exist */
@@ -26,7 +27,7 @@ INSERT INTO people (name, username, company)
   VALUES (
     'Ron Swanson',
     'dukesilver',
-    'OffermanWood'
+    'OfferManWood'
   )
   EXCEPT
   SELECT name, username, company FROM people;
