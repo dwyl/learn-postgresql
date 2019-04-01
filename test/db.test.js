@@ -16,7 +16,7 @@ db.connect(function (err, PG_CLIENT) {
 
 const path = 'dwyl'
 db.insert_log_item(path, function (err, result) {
-  const select = escape('SELECT * FROM logs ORDER by inserted_at DESC LIMIT 1');
+  const select = escape('SELECT * FROM logs ORDER by id DESC LIMIT 1');
   db.PG_CLIENT.query(select, function(err, result) {
     // console.log(err, result.rows[0]);
     test.equal(result.rows[0].path, 'dwyl', 'logs.path is ' + path);

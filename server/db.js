@@ -75,7 +75,7 @@ function insert_log_item (path, callback) {
  * select_next_page get the next path (page) to crawl
  */
 function select_next_page (callback) {
-  const q = escape(`SELECT DISTINCT(path) FROM log
+  const q = escape(`SELECT DISTINCT(path) FROM logs
              ORDER BY inserted_at DESC
              LIMIT 1`);
 
