@@ -14,13 +14,13 @@ and query your data.
 
 <br />
 
-[![Build Status](https://img.shields.io/travis/dwyl/todo-list-javascript-tutorial/master.svg?style=flat-square)](https://travis-ci.org/dwyl/todo-list-javascript-tutorial)
-[![codecov.io](https://img.shields.io/codecov/c/github/dwyl/todo-list-javascript-tutorial/master.svg?style=flat-square)](http://codecov.io/github/dwyl/todo-list-javascript-tutorial?branch=master)
-[![Dependencies: None!](https://david-dm.org/dwyl/todo-list-javascript-tutorial/status.svg?style=flat-square)](https://david-dm.org/dwyl/todo-list-javascript-tutorial)
-[![devDependencies Status](https://david-dm.org/dwyl/todo-list-javascript-tutorial/dev-status.svg?style=flat-square)](https://david-dm.org/dwyl/todo-list-javascript-tutorial?type=dev)
-[![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat-square)](https://github.com/dwyl/todo-list-javascript-tutorial/issues)
+[![Build Status](https://img.shields.io/travis/dwyl/learn-postgresql/master.svg?style=flat-square)](https://travis-ci.org/dwyl/learn-postgresql)
+[![codecov.io](https://img.shields.io/codecov/c/github/dwyl/learn-postgresql/master.svg?style=flat-square)](http://codecov.io/github/dwyl/learn-postgresql?branch=master)
+[![Dependencies: None!](https://david-dm.org/dwyl/learn-postgresql/status.svg?style=flat-square)](https://david-dm.org/dwyl/learn-postgresql)
+[![devDependencies Status](https://david-dm.org/dwyl/learn-postgresql/dev-status.svg?style=flat-square)](https://david-dm.org/dwyl/learn-postgresql?type=dev)
+[![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat-square)](https://github.com/dwyl/learn-postgresql/issues)
 <!-- uncomment when ready
-[![HitCount](http://hits.dwyl.io/dwyl/todo-list-javascript-tutorial.svg)](http://hits.dwyl.io/dwyl/todo-list-javascript-tutorial)
+[![HitCount](http://hits.dwyl.io/dwyl/learn-postgresql.svg)](http://hits.dwyl.io/dwyl/learn-postgresql)
 -->
 
 </div>
