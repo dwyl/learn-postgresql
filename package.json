@@ -9,7 +9,10 @@
   "scripts": {
     "create": "psql -U postgres -d codeface -a -f schema.sql",
     "test": "nyc tap ./test/*.test.js | tap-nyc",
-    "quick": "tap ./test/*.test.js"
+    "quick": "tap ./test/*.test.js",
+    "start": "node server/server.js",
+    "faster": "./node_modules/faster/bin/faster.js",
+    "postinstall": "npm run create"
   },
   "repository": {
     "type": "git",
@@ -28,9 +31,9 @@
   },
   "devDependencies": {
     "faster": "^3.5.1",
-    "tap": "^12.6.1",
-    "tap-spec": "^5.0.0",
     "nyc": "^13.1.0",
-    "tap-nyc": "^1.0.3"
+    "tap": "^12.6.1",
+    "tap-nyc": "^1.0.3",
+    "tap-spec": "^5.0.0"
   }
 }

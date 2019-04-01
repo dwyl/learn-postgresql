@@ -1,7 +1,7 @@
-const DBURL = process.env.DATABASE_URL
+process.env.DATABASE_URL = process.env.DATABASE_URL
   || "postgres://postgres:@localhost/codeface";
 const pg = require('pg');
-const client = new pg.Client(DBURL); // Create PostgreSQL Client/Connection
+const client = new pg.Client(process.env.DATABASE_URL);
 const test = require('tap'); // see: github.com/dwyl/learn-tape
 
 client.connect(function(err) {
