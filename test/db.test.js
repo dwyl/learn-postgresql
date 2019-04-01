@@ -10,6 +10,16 @@ db.connect(function (err, PG_CLIENT) {
   const select = escape('SELECT * FROM people WHERE id = %L', '1');
   PG_CLIENT.query(select, function(err, result) {
     test.equal(result.rows[0].username, 'jimmy', 'username is jimmy');
-    PG_CLIENT.end(); // close connection to database
+    // db.end(); // close connection to database
+  });
+});
+
+const path = 'dwyl'
+db.insert_log_item(path, function (err, result) {
+  const select = escape('SELECT * FROM logs ORDER by inserted_at DESC LIMIT 1');
+  db.PG_CLIENT.query(select, function(err, result) {
+    // console.log(err, result.rows[0]);
+    test.equal(result.rows[0].path, 'dwyl', 'logs.path is ' + path);
+    db.end(); // close connection to database
   });
 });

@@ -7,33 +7,21 @@ const PG_CLIENT = new pg.Client(process.env.DATABASE_URL);
 console.log('L7: PG_CLIENT._connecting:', PG_CLIENT._connecting, // debug
   '| PG_CLIENT._connected:', PG_CLIENT._connected);
 
-// start pg connection when module is required
+// auto-start pg connection when module is required so startup is faster!
 connect(function (err, data) {
   console.log('L12: PG_CLIENT._connected:', PG_CLIENT._connected); // confirm
   console.log('- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -');
 })
 
-// pg.connect(process.env.DATABASE_URL, function(err, client, done) {
-//   assert(!err, 'ERROR Connecting to PostgreSQL!');
-//
-//   console.log({ client: client, done: done});
-//
-//   PG_CLIENT = client; // assign client to GLOBAL for later use
-//   const select = escape('SELECT * FROM people WHERE id = %L', '1');
-//   console.log(select);
-//   PG_CLIENT.query(select, function(err, result) {
-//     // console.log(err, result);
-//     console.log(JSON.stringify(result.rows[0]), ' ... it\'s working. ;-)');
-//   });
-//   return PG_CLIENT;
-// });
-
 /**
  * exec_cb runs a callback if it's a function avoids type error if not a func.
+ * @param {function} callback - the callback function to be executed if any.
+ * @param
  */
-function exec_cb (callback, err, data) {
-  if (typeof callback === 'function') {
-    return callback(err, data);
+function exec_cb (callback, error, data) {
+  if (error) { console.error('ERROR:', error); }
+  if (callback && typeof callback === 'function') {
+    return callback(error, data);
   } // if callback is undefine or not a function do nothing!
 }
 
@@ -54,8 +42,14 @@ function connect (callback) {
   }
 }
 
+function end () {
+  if(PG_CLIENT && PG_CLIENT._connected && !PG_CLIENT._connecting) {
+    PG_CLIENT.end();
+  }
+}
+
 /**
- * insert_person saves a person's data.
+ * insert_person saves a person's data to the people table.
  *
  */
 function insert_person (data, callback) {
@@ -67,7 +61,14 @@ function insert_person (data, callback) {
  *
  */
 function insert_log_item (path, callback) {
-  const q = escape(`INSERT INTO log (path) VALUES (%L)`, path);
+  connect( function () {
+    const query = escape(`INSERT INTO logs (path) VALUES (%L)`, path);
+    console.log('L66: query:', query);
+    PG_CLIENT.query(query, function(err, result) {
+      // console.log(err, result);
+      return exec_cb (callback, err, result);
+    });
+  })
 }
 
 /**
@@ -82,6 +83,7 @@ function select_next_page (callback) {
 
 module.exports = {
   connect: connect,
+  end: end,
   insert_log_item: insert_log_item,
   select_next_page: select_next_page,
   PG_CLIENT: PG_CLIENT
