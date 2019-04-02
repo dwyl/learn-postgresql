@@ -8,7 +8,7 @@
   },
   "scripts": {
     "create": "psql -U postgres -d codeface -a -f schema.sql",
-    "test": "nyc tap ./test/*.test.js",
+    "test": "nyc tap ./test/*.test.js | tap-nyc",
     "quick": "tap ./test/*.test.js",
     "start": "node server/server.js",
     "faster": "./node_modules/faster/bin/faster.js",
@@ -18,7 +18,12 @@
     "type": "git",
     "url": "git+https://github.com/dwyl/learn-postgresql.git"
   },
-  "keywords": ["PostgreSQL", "Postgres", "Beginners", "Tutorial"],
+  "keywords": [
+    "PostgreSQL",
+    "Postgres",
+    "Beginners",
+    "Tutorial"
+  ],
   "author": "dwyl & friends",
   "license": "GPL-2.0",
   "bugs": {
@@ -33,6 +38,7 @@
     "faster": "^3.5.1",
     "nyc": "^13.1.0",
     "tap": "^12.6.1",
+    "tap-nyc": "^1.0.3",
     "tap-spec": "^5.0.0"
   }
 }
