@@ -1,3 +1,4 @@
+/* istanbul ignore next */
 process.env.DATABASE_URL = process.env.DATABASE_URL
   || "postgres://postgres:@localhost/codeface";
 const assert = require('assert');
@@ -23,6 +24,7 @@ function exec_cb (callback, error, data) {
   if (callback && typeof callback === 'function') {
     return callback(error, data);
   } // if callback is undefine or not a function do nothing!
+  return;
 }
 
 /**
@@ -101,13 +103,12 @@ function select_next_page (callback) {
       return exec_cb (callback, err, result);
     });
   });
-
-
 }
 
 module.exports = {
   connect: connect,
   end: end,
+  exec_cb: exec_cb,
   insert_log_item: insert_log_item,
   select_next_page: select_next_page,
   insert_person: insert_person,
