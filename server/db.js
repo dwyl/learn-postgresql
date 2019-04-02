@@ -63,21 +63,29 @@ function insert_person (data, callback) {
 function insert_log_item (path, callback) {
   connect( function () {
     const query = escape(`INSERT INTO logs (path) VALUES (%L)`, path);
-    console.log('L66: query:', query);
+    // console.log('L66: query:', query);
     PG_CLIENT.query(query, function(err, result) {
       // console.log(err, result);
       return exec_cb (callback, err, result);
     });
-  })
+  });
 }
 
 /**
  * select_next_page get the next path (page) to crawl
  */
 function select_next_page (callback) {
-  const q = escape(`SELECT DISTINCT(path) FROM logs
-             ORDER BY inserted_at DESC
-             LIMIT 1`);
+  connect( function () {
+    const q = escape(`SELECT path FROM logs
+               ORDER BY id ASC
+               LIMIT 1`);
+    // console.log('L82: query:', q);
+    PG_CLIENT.query(q, function(err, result) {
+      // console.log('L84:', err, result);
+      return exec_cb (callback, err, result);
+    });
+  });
+
 
 }
 
