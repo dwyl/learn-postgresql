@@ -52,8 +52,24 @@ function end () {
  * insert_person saves a person's data to the people table.
  *
  */
-function insert_person (data, callback) {
+function insert_person (person, callback) {
+  console.log('L62: test', person);
+  connect( function () {
+    const { name, username, company, uid, location } = person;
+    // console.log('name:', name, '| username:', username, '| company:', company,
+    //   '| uid:', uid, '| location:', location);
+    const fields = '(name, username, company, location, uid)'
+    // console.log(fields, name, username, company, uid, location);
+    let q = escape('INSERT INTO people %s VALUES (%L, %L, %L, %L, $1)',
+      fields, name, username, company, location);
+      q = q.replace('$1', parseInt(uid, 10));
+    // console.log('L66: query:', q);
 
+    PG_CLIENT.query(q, function(err, result) {
+      // console.log(err, result);
+      return exec_cb (callback, err, result);
+    });
+  });
 }
 
 /**
@@ -94,5 +110,6 @@ module.exports = {
   end: end,
   insert_log_item: insert_log_item,
   select_next_page: select_next_page,
+  insert_person: insert_person,
   PG_CLIENT: PG_CLIENT
 }
