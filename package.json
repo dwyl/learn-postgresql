@@ -39,7 +39,8 @@
     "nyc": "^13.1.0",
     "tap": "^12.6.1",
     "tap-nyc": "^1.0.3",
-    "tap-spec": "^5.0.0"
+    "tap-spec": "^5.0.0",
+    "terminate": "^2.1.2"
   },
   "nyc": {
     "check-coverage": true,
