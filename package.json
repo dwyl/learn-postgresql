@@ -40,5 +40,25 @@
     "tap": "^12.6.1",
     "tap-nyc": "^1.0.3",
     "tap-spec": "^5.0.0"
+  },
+  "nyc": {
+    "check-coverage": true,
+    "lines": 100,
+    "statements": 100,
+    "functions": 100,
+    "branches": 100,
+    "include": [
+      "server/*.js"
+    ],
+    "exclude": [
+      "test/*.test.js"
+    ],
+    "reporter": [
+      "lcov",
+      "text-summary"
+    ],
+    "cache": false,
+    "all": true,
+    "report-dir": "./coverage"
   }
 }
