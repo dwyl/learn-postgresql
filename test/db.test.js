@@ -7,7 +7,7 @@ const escape = require('pg-escape'); // npmjs.com/package/pg-escape santise Q's
 const db = require('../server/db');
 
 // execute to exercise branch:
-db.exec_cb(null, 'Running Tests (Don\'t Panic!)');
+db.exec_cb(null, '(Don\'t Panic! This is only a test ;-)');
 
 db.connect(function (err, PG_CLIENT) {
   const select = escape('SELECT * FROM people WHERE id = %L', '1');

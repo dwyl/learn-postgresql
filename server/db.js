@@ -20,7 +20,7 @@ connect(function (err, data) {
  * @param
  */
 function exec_cb (callback, error, data) {
-  if (error) { console.error('ERROR:', error); }
+  if (error) { console.info('db.js:23 ERROR:', error); }
   if (callback && typeof callback === 'function') {
     return callback(error, data);
   } // if callback is undefine or not a function do nothing!
