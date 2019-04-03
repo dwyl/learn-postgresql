@@ -5,12 +5,12 @@ const assert = require('assert');
 const escape = require('pg-escape'); // npmjs.com/package/pg-escape santise Q's
 const pg = require('pg');
 const PG_CLIENT = new pg.Client(process.env.DATABASE_URL);
-console.log('L7: PG_CLIENT._connecting:', PG_CLIENT._connecting, // debug
+console.log('db.js:L7: PG_CLIENT._connecting:', PG_CLIENT._connecting, // debug
   '| PG_CLIENT._connected:', PG_CLIENT._connected);
 
 // auto-start pg connection when module is required so startup is faster!
 connect(function (err, data) {
-  console.log('L12: PG_CLIENT._connected:', PG_CLIENT._connected); // confirm
+  console.log('db.js:L12: PG_CLIENT._connected:', PG_CLIENT._connected); // confirm
   console.log('- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -');
 })
 
@@ -20,7 +20,7 @@ connect(function (err, data) {
  * @param
  */
 function exec_cb (callback, error, data) {
-  if (error) { console.info('db.js:23 ERROR:', error); }
+  if (error) { console.info('db.js:L23 ERROR:', error); }
   if (callback && typeof callback === 'function') {
     return callback(error, data);
   } // if callback is undefine or not a function do nothing!
@@ -36,7 +36,7 @@ function connect (callback) {
   //   '| PG_CLIENT._connected:', PG_CLIENT._connected);
   if (PG_CLIENT && !PG_CLIENT._connected && !PG_CLIENT._connecting) {
     PG_CLIENT.connect(function (error, data) {
-      assert(!error, 'L49: ERROR Connecting to PostgreSQL!');
+      assert(!error, 'db.js:L39: ERROR Connecting to PostgreSQL!');
       return exec_cb(callback, error, PG_CLIENT);
     });
   } else {
@@ -55,7 +55,7 @@ function end () {
  *
  */
 function insert_person (person, callback) {
-  console.log('L62: test', person);
+  // console.log('db.js:L58: person', person);
   connect( function () {
     const { name, username, company, uid, location } = person;
     // console.log('name:', name, '| username:', username, '| company:', company,

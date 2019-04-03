@@ -18,21 +18,22 @@ child.stdout.on('data', function(data) {
   if(data.indexOf('http:') > -1) {
     // console.log('data', data);
     const URL = data.replace('GOTO: ', '');
-    console.log('18 URL:', URL);
+    console.log('server.test.js:L21: URL:', URL);
     http.get(URL, function(response) {
       // console.log('Status:', response.statusCode);
       // console.log('Headers: ', response.headers);
 
       response.on('end', () => {
-        // console.log(JSON.parse(data).explanation);
+        console.log(data);
+        terminate(child.pid);
       });
     }).on('error', (e) => {
-      console.error(`Got error: ${e.message}`);
+      console.error(`server.test.js:L30: CHILD PROCESS ERROR: ${e.message}`);
     });
   }
 });
 
 child.on('close', function(code) {
-  console.log('>> Closing Child Process');
+  console.log('>> Closing Child Process', code);
   terminate(child.pid);
 });
