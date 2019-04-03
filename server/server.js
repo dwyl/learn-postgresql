@@ -2,7 +2,7 @@ process.env.PORT = process.env.PORT || 4000;
 const http = require('http');
 const handlers = require('./request_handlers.js');
 
-http.createServer(function run (req, res) { // can you make simplify it? ;-)
+const server = http.createServer(function run (req, res) { // can you make simplify it? ;-)
   console.log(req.method, ':', req.url);    // absolute minimum request logging
   var url = req.url.split('?')[0];          // strip query params for routing
   switch (url) {
@@ -21,5 +21,16 @@ http.createServer(function run (req, res) { // can you make simplify it? ;-)
   }
 }).listen(process.env.PORT); // start the server with the command: npm run dev
 
+
 // show local LAN IP address so we can connect to the app on mobile
-console.info("GOTO: http://" + require('./lanip.js') + ":" + process.env.PORT);
+const address = "http://" + require('./lanip.js') + ":" + process.env.PORT;
+console.info("GOTO:", address);
+
+server.address = function () {
+  return {
+    address: require('./lanip.js'),
+    port: process.env.PORT
+  }
+}
+server.url = address;
+module.exports = server;
