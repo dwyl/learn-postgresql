@@ -28,7 +28,7 @@ child.stdout.on('data', function(data) {
         terminate(child.pid);
       });
     }).on('error', (e) => {
-      console.error(`server.test.js:L30: CHILD PROCESS ERROR: ${e.message}`);
+      console.error(`server.test.js:L31: CHILD PROCESS ERROR: ${e.message}`);
     });
   }
 });

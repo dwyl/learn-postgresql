@@ -37,6 +37,7 @@
   "devDependencies": {
     "faster": "^3.5.1",
     "nyc": "^13.1.0",
+    "supertest": "^4.0.2",
     "tap": "^12.6.1",
     "tap-nyc": "^1.0.3",
     "tap-spec": "^5.0.0",
