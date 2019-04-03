@@ -44,10 +44,10 @@
   },
   "nyc": {
     "check-coverage": true,
-    "lines": 100,
-    "statements": 100,
-    "functions": 100,
-    "branches": 100,
+    "lines": 50,
+    "statements": 50,
+    "functions": 50,
+    "branches": 50,
     "include": [
       "server/*.js"
     ],
