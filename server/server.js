@@ -21,16 +21,9 @@ const server = http.createServer(function run (req, res) { // can you make simpl
   }
 }).listen(process.env.PORT); // start the server with the command: npm run dev
 
+// url used in tests:
+server.url = "http://" + require('./lanip.js') + ":" + process.env.PORT;
+// show local LAN IP address in console so we can connect to the app on mobile:
+console.info("GOTO:", server.url);
 
-// show local LAN IP address so we can connect to the app on mobile
-const address = "http://" + require('./lanip.js') + ":" + process.env.PORT;
-console.info("GOTO:", address);
-
-server.address = function () {
-  return {
-    address: require('./lanip.js'),
-    port: process.env.PORT
-  }
-}
-server.url = address;
 module.exports = server;
