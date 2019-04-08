@@ -12,7 +12,8 @@
     "quick": "tap ./test/*.test.js",
     "start": "node server/server.js",
     "faster": "./node_modules/faster/bin/faster.js",
-    "postinstall": "npm run create"
+    "postinstall": "npm run create",
+    "open-cov": "open ./coverage/lcov-report/index.html"
   },
   "repository": {
     "type": "git",
