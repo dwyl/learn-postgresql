@@ -4,8 +4,8 @@ const gs = require('github-scraper');
 
 function fetch (path, callback) {
   gs(path, function(err, data) {
-    if (err) { db.exec_cb(callback, err, data) }
-    console.log(data); // or what ever you want to do with the data
+    return db.exec_cb(callback, err, data)
+    // console.log(data); // or what ever you want to do with the data
   })
 }
 
@@ -13,6 +13,6 @@ module.exports = {
   fetch: fetch
 }
 
-gs('torvalds', function(err, data) {
-  console.log(err, data);
-});
+// gs('torvalds', function(err, data) {
+//   console.log(err, data);
+// });
