@@ -57,8 +57,14 @@ INSERT INTO followers (follower_id, leader_id)
 CREATE TABLE IF NOT EXISTS "orgs" (
   "inserted_at" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   "id" SERIAL PRIMARY KEY,
+  "name" VARCHAR(50) DEFAULT NULL,
   "url" VARCHAR(50),
-  "username" VARCHAR(50) NOT NULL UNIQUE
+  "description" VARCHAR(255) DEFAULT NULL,
+  "location" VARCHAR(50) DEFAULT NULL,
+  "website" VARCHAR(255) DEFAULT NULL,
+  "email" VARCHAR(255) DEFAULT NULL,
+  "pcount" INT DEFAULT 0,
+  "uid" INT NOT NULL UNIQUE
 );
 
 INSERT INTO orgs (url, username)

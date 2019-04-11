@@ -48,9 +48,29 @@ db.insert_person(person, function (err, result) {
   db.PG_CLIENT.query(select, function(err, result) {
     // console.log(err, result.rows[0]);
     test.equal(result.rows[0].name, person.name, 'person.name ' + person.name);
-    db.end(); // close connection to database
-    db.end(); // close connection to database
   });
 });
 
-db.end();
+test.test('insert_org', function(t){
+  const org = require('./fixtures/org.json');
+  // given that we have a uniqueness constraint on the name and uid fields
+  // we must TRUNCATE the orgs table when running tests:
+  db.PG_CLIENT.query('TRUNCATE TABLE orgs CASCADE', function (err2, result2) {
+    // console.log(' - - - - - - ');
+    // console.log(err2, result2);
+    // console.log(' - - - - - - ');
+    db.insert_org(org, function (err, result) {
+      // console.log(err, result);
+
+      const select = escape('SELECT * FROM orgs ORDER by id DESC LIMIT 1');
+      db.PG_CLIENT.query(select, function(err, result) {
+        console.log(err, result.rows[0]);
+        // test.equal(result.rows[0].name, org.name, 'org.name ' + org.name);
+        db.end(); // close connection to database
+        t.end();
+      });
+    });
+  });
+})
+
+// db.end();

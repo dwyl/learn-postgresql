@@ -32,8 +32,8 @@ function exec_cb (callback, error, data) {
  * @param {function} callback - function called once connection is confirmed.
  */
 function connect (callback) {
-  // console.log('L45: PG_CLIENT._connecting:', PG_CLIENT._connecting,
-  //   '| PG_CLIENT._connected:', PG_CLIENT._connected);
+  console.log('L45: PG_CLIENT._connecting:', PG_CLIENT._connecting,
+    '| PG_CLIENT._connected:', PG_CLIENT._connected);
   if (PG_CLIENT && !PG_CLIENT._connected && !PG_CLIENT._connecting) {
     PG_CLIENT.connect(function (error, data) {
       assert(!error, 'db.js:L39: ERROR Connecting to PostgreSQL!');
@@ -75,6 +75,32 @@ function insert_person (person, callback) {
 }
 
 /**
+ * insert_org saves an org's data to the orgs table.
+ *
+ */
+function insert_org (data, callback) {
+  const fields = '(' + [ "url", "name", "description", "location",
+  "website", "email", "pcount", "uid"].join(',') + ')';
+  // console.log('db.js:L58: person', person);
+  connect( function () {
+    const { url,name,description,location,website,email,pcount,uid } = data;
+    // console.log(fields, name, username, company, uid, location);
+    const placeholders = '%L, %L, %L, %L, %L, %L, $p, $1'
+    let q = escape('INSERT INTO orgs %s VALUES (' + placeholders + ')',
+      fields, url,name,description,location,website,email);
+      q = q.replace('$1', parseInt(uid, 10));
+      q = q.replace('$p', parseInt(pcount, 10));
+    console.log('L93: query:', q);
+
+    PG_CLIENT.query(q, function(err, result) {
+      // console.log(err, result);
+      return exec_cb (callback, err, result);
+    });
+  });
+}
+
+
+/**
  * insert_log_item does exactly what it's name suggests inserts a log enty.
  *
  */
@@ -112,5 +138,6 @@ module.exports = {
   insert_log_item: insert_log_item,
   select_next_page: select_next_page,
   insert_person: insert_person,
+  insert_org: insert_org,
   PG_CLIENT: PG_CLIENT
 }
