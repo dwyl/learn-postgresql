@@ -110,11 +110,11 @@ CREATE TABLE IF NOT EXISTS "repos" (
 
 CREATE TABLE IF NOT EXISTS "stars" (
   "inserted_at" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  "person_id" INT REFERENCES people (id), -- can be NULL if repo belongs to org.
+  "person_id" INT REFERENCES people (id), -- only people can "star" repos.
     CONSTRAINT "stars_fk0"
     FOREIGN KEY ("person_id")
     REFERENCES people (id),
-	"repo_id" INT REFERENCES repos (id), -- this can be NULL if repo is personal.
+	"repo_id" INT REFERENCES repos (id),
     CONSTRAINT "stars_fk1"
     FOREIGN KEY ("repo_id")
     REFERENCES repos (id)
@@ -123,5 +123,6 @@ CREATE TABLE IF NOT EXISTS "stars" (
 CREATE TABLE IF NOT EXISTS "logs" (
   "id" SERIAL PRIMARY KEY,
   "inserted_at" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  "path" VARCHAR(255) NOT NULL
+  "path" VARCHAR(255) NOT NULL,
+	"next_page" VARCHAR(255) DEFAULT NULL
 );

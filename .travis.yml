@@ -8,6 +8,6 @@ env:
 services:
   - postgresql
 before_install:
-  - psql -c 'CREATE DATABASE codeface;' -U postgres
+  - psql -U postgres -c 'CREATE DATABASE codeface;'
 after_success:
   - bash <(curl -s https://codecov.io/bash)
