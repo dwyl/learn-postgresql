@@ -57,10 +57,10 @@ function end (callback) {
  * insert_person saves a person's data to the people table.
  *
  */
-function insert_person (person, callback) {
+function insert_person (data, callback) {
   // console.log('db.js:L58: person', person);
   connect( function () {
-    const { name, username, worksfor, location, website, uid } = person;
+    const { name, username, worksfor, location, website, uid } = data;
     // console.log('name:', name, '| username:', username, '| company:', company,
     //   '| uid:', uid, '| location:', location);
     const fields = '(name, username, worksfor, location, website, uid)';
@@ -72,8 +72,7 @@ function insert_person (person, callback) {
     // console.log('L66: query:', q);
 
     PG_CLIENT.query(q, function(err, result) {
-      // console.log(err, result);
-      return exec_cb (callback, err, result);
+      return insert_next_page (data, callback);
     });
   });
 }
@@ -100,36 +99,42 @@ function insert_org (data, callback) {
     // console.log('L93: query:', q);
 
     PG_CLIENT.query(q, function(err, result) {
-
-      insert_next_page (data, callback);
-      // console.log(err, result);
-      //
+      return insert_next_page (data, callback);
     });
   });
 }
 
 /**
- * insert_log_item does exactly what it's name suggests inserts a log enty.
+ * insert_next_page inserts the list of next pages to be crawled.
  *
  */
 function insert_next_page (data, callback) {
   let urls = []
   switch (data.type) {
     case 'org':
+      console.log('data.name', data.name);
       urls = data.entries.map((e) => e.url);
+      urls.push('orgs/' + data.name + '/people'); // list of PUBLIC org members.
       urls.push(data.next_page); // if it exists.
+      break;
+    case 'profile':
+      urls = data.pinned.map((e) => e.url);
+      const orgs = Object.keys(data.orgs);
+      orgs.forEach(org => urls.push(org));
+      urls.push(data.url + '/followers');
+      urls.push(data.url + '/following');
+      urls.push(data.url + '?tab=repositories');
       break;
     // add more here
   }
-
   let len = urls.length;
-  console.log('urls.length:', len);
+  // console.log('urls.length:', len);
 
-  urls.filter((e) => e !== null) // filter out blanks
-  .forEach((next, i) => { // the poor person's "async parallel":
+  urls.filter((e) => e !== null) // filter out blanks (if next_page is null)
+  .forEach((next, i) => { // poor person's "async parallel":
     // console.log(i, next);
-    insert_log_item(data.url, next, (err,data) => {
-      if(--i == 0) {
+    insert_log_item(data.url, next, (err, data2) => {
+      if(--len == 0) {
         return exec_cb (callback, null, data);
       }
     })

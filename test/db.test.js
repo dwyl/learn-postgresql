@@ -9,14 +9,6 @@ const db = require('../server/db');
 // execute to exercise branch:
 db.exec_cb(null, '(Don\'t Panic! This is only a test ;-)');
 
-// db.connect(function (err, PG_CLIENT) {
-//   const select = escape('SELECT * FROM people WHERE id = %L', '1');
-//   PG_CLIENT.query(select, function(err, result) {
-//     test.equal(result.rows[0].username, 'jimmy', 'username is jimmy');
-//     db.end(); // close connection to database
-//   });
-// });
-
 const path = 'dwyl' + seed;
 db.insert_log_item(path, null, function (err, result) {
   const select = escape('SELECT * FROM logs ORDER by id DESC LIMIT 1');
