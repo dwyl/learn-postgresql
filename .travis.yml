@@ -7,7 +7,7 @@ env:
     - NODE_ENV=TEST
 services:
   - postgresql
-before_install:
-  - psql -U postgres -c 'CREATE DATABASE codeface;'
+# before_install:
+#   - psql -U postgres -c 'CREATE DATABASE codeface;'
 after_success:
   - bash <(curl -s https://codecov.io/bash)

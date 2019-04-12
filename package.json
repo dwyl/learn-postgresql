@@ -10,12 +10,12 @@
     "drop": "psql -U postgres -c 'DROP DATABASE IF EXISTS codeface;'",
     "create": "psql -U postgres -c 'CREATE DATABASE codeface;'",
     "schema": "psql -U postgres -d codeface -a -f schema.sql",
-    "recreate":"npm run drop && npm run create && npm run schema",
+    "recreate": "npm run drop && npm run create && npm run schema",
     "test": "nyc tap ./test/*.test.js | tap-nyc",
     "quick": "tap ./test/*.test.js",
     "start": "node server/server.js",
     "faster": "./node_modules/faster/bin/faster.js",
-    "postinstall": "npm run create",
+    "postinstall": "npm run recreate",
     "open-cov": "open ./coverage/lcov-report/index.html"
   },
   "repository": {
