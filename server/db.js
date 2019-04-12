@@ -45,9 +45,11 @@ function connect (callback) {
 }
 
 function end (callback) {
+  /* istanbul ignore else */
   if(PG_CLIENT && PG_CLIENT._connected && !PG_CLIENT._connecting) {
-    PG_CLIENT.end(() => { return exec_cb (callback, null, PG_CLIENT); });
-
+    PG_CLIENT.end(() => {
+      return exec_cb (callback, null, PG_CLIENT);
+    });
   }
 }
 

@@ -2,7 +2,7 @@ const test = require('tap').test;
 const spider = require('../server/spider');
 const db = require('../server/db');
 const seed = Math.floor(Math.random() * Math.floor(100000));
-/*
+
 test('crawl non-existent page to test 404', function (t) {
   spider.fetch('/totesamaze' + seed, function(err, data) {
     t.equal(err, 404, 'err: ' + err + ' (as expected ;-)');
@@ -27,13 +27,15 @@ test('crawl @dwyl org', function (t) {
     });
   });
 });
-*/
+
 test('crawl @iteles person profile', function (t) {
   spider.fetch('iteles', function(err, data) {
     // console.log(err, data.entries[0]);
     // console.log(data);
     require('./fixtures/make-fixture')('person.json', data);
-    db.end(); // close connection to database
-    t.end()
+    db.end(() => {
+      t.end()
+    }); // close connection to database
+
   });
 });

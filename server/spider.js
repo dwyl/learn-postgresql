@@ -16,9 +16,9 @@ function fetch (path, callback) {
         db.insert_org(data, callback);
         break;
       case 'profile':
-        
+
         return db.exec_cb(callback, err, data)
-        break;
+        // break;
     }
     // if (data && data.)
     // console.log('data:', data);
