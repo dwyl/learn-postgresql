@@ -1,0 +1,16 @@
+{
+  "url": "/dwyl/todo-list-javascript-tutorial",
+  "type": "repo",
+  "description": "✅ A step-by-step complete beginner example/tutorial for building a Todo List App (TodoMVC) from scratch in JavaScript following Test Driven Development (TDD) best practice. 🌱",
+  "website": "https://todomvc-app.herokuapp.com",
+  "watchers": 211,
+  "stars": 69,
+  "forks": 12,
+  "commits": 301,
+  "branches": 1,
+  "releases": 0,
+  "langs": [
+    "JavaScript 87.6%",
+    "CSS 9.5%"
+  ]
+}
