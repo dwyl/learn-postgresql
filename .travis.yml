@@ -8,6 +8,6 @@ env:
 services:
   - postgresql
 before_install:
-  - npm run recreate
+  - psql -U postgres -c 'CREATE DATABASE codeface;'
 after_success:
   - bash <(curl -s https://codecov.io/bash)
