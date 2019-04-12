@@ -7,7 +7,10 @@
     "test": "test"
   },
   "scripts": {
-    "create": "psql -U postgres -d codeface -a -f schema.sql",
+    "drop": "psql -U postgres -c 'DROP DATABASE IF EXISTS codeface;'",
+    "create": "psql -U postgres -c 'CREATE DATABASE codeface;'",
+    "schema": "psql -U postgres -d codeface -a -f schema.sql",
+    "recreate":"npm run drop && npm run create && npm run schema",
     "test": "nyc tap ./test/*.test.js | tap-nyc",
     "quick": "tap ./test/*.test.js",
     "start": "node server/server.js",
@@ -32,7 +35,7 @@
   },
   "homepage": "https://github.com/dwyl/learn-postgresql#readme",
   "dependencies": {
-    "github-scraper": "^6.5.0",
+    "github-scraper": "^6.6.4",
     "pg": "^7.8.1",
     "pg-escape": "^0.2.0"
   },
