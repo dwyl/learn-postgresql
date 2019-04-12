@@ -32,8 +32,8 @@ function exec_cb (callback, error, data) {
  * @param {function} callback - function called once connection is confirmed.
  */
 function connect (callback) {
-  console.log('L45: PG_CLIENT._connecting:', PG_CLIENT._connecting,
-    '| PG_CLIENT._connected:', PG_CLIENT._connected);
+  // console.log('L45: PG_CLIENT._connecting:', PG_CLIENT._connecting,
+  //   '| PG_CLIENT._connected:', PG_CLIENT._connected);
   if (PG_CLIENT && !PG_CLIENT._connected && !PG_CLIENT._connecting) {
     PG_CLIENT.connect(function (error, data) {
       assert(!error, 'db.js:L39: ERROR Connecting to PostgreSQL!');
@@ -44,9 +44,10 @@ function connect (callback) {
   }
 }
 
-function end () {
+function end (callback) {
   if(PG_CLIENT && PG_CLIENT._connected && !PG_CLIENT._connecting) {
-    PG_CLIENT.end();
+    PG_CLIENT.end(() => { return exec_cb (callback, null, PG_CLIENT); });
+
   }
 }
 
@@ -57,13 +58,14 @@ function end () {
 function insert_person (person, callback) {
   // console.log('db.js:L58: person', person);
   connect( function () {
-    const { name, username, company, uid, location } = person;
+    const { name, username, worksfor, location, website, uid } = person;
     // console.log('name:', name, '| username:', username, '| company:', company,
     //   '| uid:', uid, '| location:', location);
-    const fields = '(name, username, company, location, uid)'
+    const fields = '(name, username, worksfor, location, website, uid)';
+
     // console.log(fields, name, username, company, uid, location);
-    let q = escape('INSERT INTO people %s VALUES (%L, %L, %L, %L, $1)',
-      fields, name, username, company, location);
+    let q = escape('INSERT INTO people %s VALUES (%L, %L, %L, %L, %L, $1)',
+      fields, name, username, worksfor, location, website);
       q = q.replace('$1', parseInt(uid, 10));
     // console.log('L66: query:', q);
 
@@ -88,25 +90,60 @@ function insert_org (data, callback) {
     const placeholders = '%L, %L, %L, %L, %L, %L, $p, $1'
     let q = escape('INSERT INTO orgs %s VALUES (' + placeholders + ')',
       fields, url,name,description,location,website,email);
+      // for some reason pg-escape does not play well with integers ...
+      // see: https://github.com/segmentio/pg-escape/issues/15
+      // so we are manually replacing the values:
       q = q.replace('$1', parseInt(uid, 10));
       q = q.replace('$p', parseInt(pcount, 10));
-    console.log('L93: query:', q);
+    // console.log('L93: query:', q);
 
     PG_CLIENT.query(q, function(err, result) {
+
+      insert_next_page (data, callback);
       // console.log(err, result);
-      return exec_cb (callback, err, result);
+      //
     });
   });
 }
+
+/**
+ * insert_log_item does exactly what it's name suggests inserts a log enty.
+ *
+ */
+function insert_next_page (data, callback) {
+  let urls = []
+  switch (data.type) {
+    case 'org':
+      urls = data.entries.map((e) => e.url);
+      urls.push(data.next_page); // if it exists.
+      break;
+    // add more here
+  }
+
+  let len = urls.length;
+  console.log('urls.length:', len);
+
+  urls.filter((e) => e !== null) // filter out blanks
+  .forEach((next, i) => { // the poor person's "async parallel":
+    // console.log(i, next);
+    insert_log_item(data.url, next, (err,data) => {
+      if(--i == 0) {
+        return exec_cb (callback, null, data);
+      }
+    })
+  });
+}
+
 
 
 /**
  * insert_log_item does exactly what it's name suggests inserts a log enty.
  *
  */
-function insert_log_item (path, callback) {
+function insert_log_item (path, next_page, callback) {
   connect( function () {
-    const query = escape(`INSERT INTO logs (path) VALUES (%L)`, path);
+    const query = escape(`INSERT INTO logs (path, next_page) VALUES (%L, %L)`,
+      path, next_page);
     // console.log('L66: query:', query);
     PG_CLIENT.query(query, function(err, result) {
       // console.log(err, result);

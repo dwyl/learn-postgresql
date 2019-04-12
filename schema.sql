@@ -3,9 +3,10 @@ CREATE TABLE IF NOT EXISTS "people" (
 	"id" SERIAL PRIMARY KEY,
 	"name" VARCHAR(50) DEFAULT NULL,
 	"username" VARCHAR(50) NOT NULL UNIQUE,
-	"company" VARCHAR(50) DEFAULT NULL,
-  "uid" INT DEFAULT NULL, -- the person's GitHub uid e.g: 4185328
-  "location" VARCHAR(100) DEFAULT NULL
+	"worksfor" VARCHAR(50) DEFAULT NULL,
+  "uid" INT NOT NULL UNIQUE, -- the person's GitHub uid e.g: 4185328
+  "location" VARCHAR(100) DEFAULT NULL,
+	"website" VARCHAR(255) DEFAULT NULL
 );
 
 /* insert a person into the people table if it does not already exist */

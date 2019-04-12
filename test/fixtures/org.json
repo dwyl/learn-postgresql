@@ -1,5 +1,6 @@
 {
   "url": "/dwyl",
+  "type": "org",
   "name": "dwyl",
   "description": "Start here: https://github.com/dwyl/start-here",
   "location": "London, UK",
@@ -14,14 +15,21 @@
       "lang": "JavaScript",
       "url": "/dwyl/aws-sdk-mock",
       "description": "🌈 AWSomocks for Javascript/Node.js aws-sdk tested, documented & maintained. Contributions welcome!",
-      "updated": "2019-04-11T00:44:34Z"
+      "updated": "2019-04-12T08:36:15Z"
+    },
+    {
+      "name": "xg2xg",
+      "lang": "",
+      "url": "/dwyl/xg2xg",
+      "description": "by ex-googlers, for ex-googlers - a lookup table of similar tech & services",
+      "updated": "2019-04-12T04:28:20Z"
     },
     {
       "name": "learn-postgresql",
       "lang": "",
       "url": "/dwyl/learn-postgresql",
       "description": "🐘 Learn how to use PostgreSQL and Structured Query Language (SQL) to store and query your relational data. 🔍",
-      "updated": "2019-04-10T22:08:25Z"
+      "updated": "2019-04-11T21:57:58Z"
     },
     {
       "name": "learn-elixir",
@@ -211,13 +219,6 @@
       "url": "/dwyl/product-owner-guide",
       "description": "🚀 A rough guide for people working with dwyl as Product Owners",
       "updated": "2019-03-05T15:01:05Z"
-    },
-    {
-      "name": "learn-tdd",
-      "lang": "JavaScript",
-      "url": "/dwyl/learn-tdd",
-      "description": "✅ A brief introduction to Test Driven Development (TDD) in JavaScript (Complete Beginner's Step-by-Step Tutorial)",
-      "updated": "2019-02-25T17:01:02Z"
     }
   ],
   "next_page": "/dwyl?page=2"
