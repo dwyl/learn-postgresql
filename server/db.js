@@ -14,10 +14,14 @@ connect(function (err, data) {
   console.log('- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -');
 })
 
+
+
+
 /**
  * exec_cb runs a callback if it's a function avoids type error if not a func.
  * @param {function} callback - the callback function to be executed if any.
- * @param
+ * @param {Object|String} error - the error reported
+ * @param {Object} data - any data being passed back to the calling function.
  */
 function exec_cb (callback, error, data) {
   if (error) { console.info('db.js:L23 ERROR:', error); }
@@ -60,18 +64,19 @@ function end (callback) {
 function insert_person (data, callback) {
   // console.log('db.js:L58: person', person);
   connect( function () {
-    const { name, username, worksfor, location, website, uid } = data;
-    // console.log('name:', name, '| username:', username, '| company:', company,
-    //   '| uid:', uid, '| location:', location);
-    const fields = '(name, username, worksfor, location, website, uid)';
+    const { name, username, bio, worksfor, location, website, uid } = data;
+    console.log('name:', name, '| username:', username, '| worksfor:', worksfor,
+    ' | bio: ', bio, '| uid:', uid, '| location:', location);
+    const fields = '(name, username, bio, worksfor, location, website, uid)';
 
     // console.log(fields, name, username, company, uid, location);
-    let q = escape('INSERT INTO people %s VALUES (%L, %L, %L, %L, %L, $1)',
-      fields, name, username, worksfor, location, website);
+    let q = escape('INSERT INTO people %s VALUES (%L, %L, %L, %L, %L, %L, $1)',
+      fields, name, username, bio, worksfor, location, website);
       q = q.replace('$1', parseInt(uid, 10));
-    // console.log('L66: query:', q);
+    console.log('L72: insert_person query:', q);
 
     PG_CLIENT.query(q, function(err, result) {
+
       return insert_next_page (data, callback);
     });
   });
@@ -103,6 +108,35 @@ function insert_org (data, callback) {
     });
   });
 }
+
+/**
+ * insert_repo saves an repo's stats to the repos table.
+ *
+ */
+function insert_repo (data, callback) {
+
+  const fields = '(' + [ "url", "description", "website", "watchers", "stars",
+    "forks", "commits", "branches", "releases", "langs" ].join(',') + ')';
+  console.log('db.js:L116: insert_repo > data', data);
+  connect( function () {
+    const { url,name,description,location,website,email,pcount,uid } = data;
+    // console.log(fields, name, username, company, uid, location);
+    const placeholders = '%L, %L, %L, %L, %L, %L, $p, $1'
+    let q = escape('INSERT INTO orgs %s VALUES (' + placeholders + ')',
+      fields, url,name,description,location,website,email);
+      // for some reason pg-escape does not play well with integers ...
+      // see: https://github.com/segmentio/pg-escape/issues/15
+      // so we are manually replacing the values:
+      q = q.replace('$1', parseInt(uid, 10));
+      q = q.replace('$p', parseInt(pcount, 10));
+    // console.log('L93: query:', q);
+
+    PG_CLIENT.query(q, function(err, result) {
+      return insert_next_page (data, callback);
+    });
+  });
+}
+
 
 /**
  * insert_next_page inserts the list of next pages to be crawled.
@@ -183,5 +217,6 @@ module.exports = {
   select_next_page: select_next_page,
   insert_person: insert_person,
   insert_org: insert_org,
+  insert_repo: insert_repo,
   PG_CLIENT: PG_CLIENT
 }
