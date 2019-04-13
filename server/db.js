@@ -127,10 +127,9 @@ function insert_repo (data, callback) {
   });
 }
 
-
 /**
  * insert_next_page inserts the list of next pages to be crawled.
- *
+ * @param {Object} data - a valid JSON object containing data to be inserted.
  */
 function insert_next_page (data, callback) {
   let urls = []
@@ -155,11 +154,8 @@ function insert_next_page (data, callback) {
       break;
   }
   let len = urls.length;
-  // console.log('urls.length:', len);
-
   urls.filter((e) => e !== null) // filter out blanks (if next_page is null)
   .forEach((next, i) => { // poor person's "async parallel":
-    // console.log(i, next);
     insert_log_item(data.url, next, (error, data2) => {
       if(--len == 0) {
         return utils.exec_cb(callback, null, data);
@@ -167,8 +163,6 @@ function insert_next_page (data, callback) {
     })
   });
 }
-
-
 
 /**
  * insert_log_item does exactly what it's name suggests inserts a log enty.
@@ -191,7 +185,7 @@ function insert_log_item (path, next_page, callback) {
  */
 function select_next_page (callback) {
   connect( function () {
-    const q = escape(`SELECT path FROM logs
+    const q = escape(`SELECT * FROM logs
                ORDER BY id ASC
                LIMIT 1`);
     // console.log('L82: query:', q);

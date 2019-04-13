@@ -11,18 +11,18 @@
   "uid": 11708465,
   "entries": [
     {
+      "name": "learn-postgresql",
+      "lang": "",
+      "url": "/dwyl/learn-postgresql",
+      "description": "🐘 Learn how to use PostgreSQL and Structured Query Language (SQL) to store and query your relational data. 🔍",
+      "updated": "2019-04-13T12:47:42Z"
+    },
+    {
       "name": "learn-json-web-tokens",
       "lang": "JavaScript",
       "url": "/dwyl/learn-json-web-tokens",
       "description": "🔐 Learn how to use JSON Web Token (JWT) to secure your next Web App! (Tutorial/Example with Tests!!)",
       "updated": "2019-04-12T19:27:47Z"
-    },
-    {
-      "name": "learn-postgresql",
-      "lang": "",
-      "url": "/dwyl/learn-postgresql",
-      "description": "🐘 Learn how to use PostgreSQL and Structured Query Language (SQL) to store and query your relational data. 🔍",
-      "updated": "2019-04-12T17:16:46Z"
     },
     {
       "name": "aws-sdk-mock",
