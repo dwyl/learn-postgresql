@@ -66,11 +66,29 @@ function insert_person (data, callback) {
         .replace('$c', parseInt(contribs, 10))
         .replace('$r', utils.recent_activity(data));
 
-    console.log('L69: insert_person query:', q);
+    // console.log('L69: insert_person query:', q);
 
     PG_CLIENT.query(q, function(error, result) {
       utils.log_error(error, data, new Error().stack);
       return insert_next_page (data, callback);
+    });
+  });
+}
+
+/**
+ * select_person gets the person from people table.
+ * @param {string} username - username of the person e.g: 'iteles'
+ * @param {function} callback - callback function to be executed on success.
+ */
+function select_person (username, callback) {
+  connect( function select_person_after_connected () {
+    let q = escape(`SELECT * FROM people WHERE username = %L
+      ORDER BY id ASC LIMIT 1`,
+      username.replace('/followers', '').split('?')[0]);
+    // console.log('L151 q:', q);
+    PG_CLIENT.query(q, function(error, result) {
+      utils.log_error(error, result, new Error().stack);
+      return utils.exec_cb(callback, error, result);
     });
   });
 }
@@ -145,9 +163,10 @@ function insert_repo (data, callback) {
  */
 function select_repo (url, callback) {
   connect( function select_repo_after_connected () {
-    let q = escape(`SELECT * FROM repos WHERE url = %L LIMIT 1`,
+    let q = escape(`SELECT * FROM repos WHERE url = %L
+      ORDER BY id ASC LIMIT 1`,
       url.replace('/stargazers', ''));
-    console.log('207 q:', q);
+    // console.log('L151 q:', q);
     PG_CLIENT.query(q, function(error, result) {
       utils.log_error(error, result, new Error().stack);
       return utils.exec_cb(callback, error, result);
@@ -165,7 +184,7 @@ function insert_next_page (data, callback) {
   let urls = []
   switch (data.type) {
     case 'org':
-      console.log('data.name', data.name);
+      // console.log('data.name', data.name);
       urls = data.entries.map((e) => e.url);
       urls.push('orgs/' + data.name + '/people'); // list of PUBLIC org members.
       urls.push(data.next_page); // if it exists.
@@ -263,9 +282,10 @@ module.exports = {
   end: end,
   insert_log_item: insert_log_item,
   select_next_page: select_next_page,
-  select_repo: select_repo,
   insert_person: insert_person,
+  select_person: select_person,
   insert_org: insert_org,
   insert_repo: insert_repo,
+  select_repo: select_repo,
   PG_CLIENT: PG_CLIENT
 }

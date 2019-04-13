@@ -39,8 +39,7 @@ tap.test('insert_person insert test/fixtures/person.json data', function(t) {
   db.PG_CLIENT.query('TRUNCATE TABLE people CASCADE', function (err2, result2) {
 
     db.insert_person(person, function (err, result) {
-      const select = escape('SELECT * FROM people ORDER by id DESC LIMIT 1');
-      db.PG_CLIENT.query(select, function(err, result) {
+      db.select_person(person.username, function(err, result) {
         t.equal(result.rows[0].name, person.name, 'person.name ' + person.name);
         t.end();
       });
