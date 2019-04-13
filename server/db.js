@@ -1,10 +1,11 @@
 /* istanbul ignore next */
 process.env.DATABASE_URL = process.env.DATABASE_URL
   || "postgres://postgres:@localhost/codeface";
-const assert = require('assert');
 const escape = require('pg-escape'); // npmjs.com/package/pg-escape santise Q's
 const pg = require('pg');
 const PG_CLIENT = new pg.Client(process.env.DATABASE_URL);
+const utils = require('./utils');
+
 console.log('db.js:L7: PG_CLIENT._connecting:', PG_CLIENT._connecting, // debug
   '| PG_CLIENT._connected:', PG_CLIENT._connected);
 
@@ -16,21 +17,6 @@ connect(function (err, data) {
 
 
 
-
-/**
- * exec_cb runs a callback if it's a function avoids type error if not a func.
- * @param {function} callback - the callback function to be executed if any.
- * @param {Object|String} error - the error reported
- * @param {Object} data - any data being passed back to the calling function.
- */
-function exec_cb (callback, error, data) {
-  if (error) { console.info('db.js:L23 ERROR:', error); }
-  if (callback && typeof callback === 'function') {
-    return callback(error, data);
-  } // if callback is undefine or not a function do nothing!
-  return;
-}
-
 /**
  * connnect ensures that a postgres connection is available before continuing
  * @param {function} callback - function called once connection is confirmed.
@@ -40,11 +26,11 @@ function connect (callback) {
   //   '| PG_CLIENT._connected:', PG_CLIENT._connected);
   if (PG_CLIENT && !PG_CLIENT._connected && !PG_CLIENT._connecting) {
     PG_CLIENT.connect(function (error, data) {
-      assert(!error, 'db.js:L39: ERROR Connecting to PostgreSQL!');
-      return exec_cb(callback, error, PG_CLIENT);
+      utils.log_error(error, data, new Error().stack);
+      return utils.exec_cb(callback, error, PG_CLIENT);
     });
   } else {
-    return exec_cb (callback, null, PG_CLIENT);
+    return utils.exec_cb(callback, null, PG_CLIENT);
   }
 }
 
@@ -52,7 +38,7 @@ function end (callback) {
   /* istanbul ignore else */
   if(PG_CLIENT && PG_CLIENT._connected && !PG_CLIENT._connecting) {
     PG_CLIENT.end(() => {
-      return exec_cb (callback, null, PG_CLIENT);
+      return utils.exec_cb (callback, null, PG_CLIENT);
     });
   }
 }
@@ -65,18 +51,16 @@ function insert_person (data, callback) {
   // console.log('db.js:L58: person', person);
   connect( function () {
     const { name, username, bio, worksfor, location, website, uid } = data;
-    console.log('name:', name, '| username:', username, '| worksfor:', worksfor,
-    ' | bio: ', bio, '| uid:', uid, '| location:', location);
+    // console.log('name:', name, '| username:', username, '| worksfor:', worksfor,
+    // ' | bio: ', bio, '| uid:', uid, '| location:', location);
     const fields = '(name, username, bio, worksfor, location, website, uid)';
-
-    // console.log(fields, name, username, company, uid, location);
     let q = escape('INSERT INTO people %s VALUES (%L, %L, %L, %L, %L, %L, $1)',
       fields, name, username, bio, worksfor, location, website);
       q = q.replace('$1', parseInt(uid, 10));
-    console.log('L72: insert_person query:', q);
+    // console.log('L72: insert_person query:', q);
 
-    PG_CLIENT.query(q, function(err, result) {
-
+    PG_CLIENT.query(q, function(error, result) {
+      utils.log_error(error, data, new Error().stack);
       return insert_next_page (data, callback);
     });
   });
@@ -103,7 +87,8 @@ function insert_org (data, callback) {
       q = q.replace('$p', parseInt(pcount, 10));
     // console.log('L93: query:', q);
 
-    PG_CLIENT.query(q, function(err, result) {
+    PG_CLIENT.query(q, function(error, result) {
+      utils.log_error(error, data, new Error().stack);
       return insert_next_page (data, callback);
     });
   });
@@ -115,23 +100,28 @@ function insert_org (data, callback) {
  */
 function insert_repo (data, callback) {
 
-  const fields = '(' + [ "url", "description", "website", "watchers", "stars",
-    "forks", "commits", "branches", "releases", "langs" ].join(',') + ')';
-  console.log('db.js:L116: insert_repo > data', data);
+  const fields = '(' + [ "url", "description", "website", "tags", "langs",
+  "watchers", "stars", "forks", "commits"].join(',') + ')';
+  // console.log('db.js:L105: insert_repo > data', Object.keys(data).join(','));
   connect( function () {
-    const { url,name,description,location,website,email,pcount,uid } = data;
+    const { url, description, website, tags, langs, // string data
+      watchers, stars, forks, commits} = data; // int data
     // console.log(fields, name, username, company, uid, location);
-    const placeholders = '%L, %L, %L, %L, %L, %L, $p, $1'
-    let q = escape('INSERT INTO orgs %s VALUES (' + placeholders + ')',
-      fields, url,name,description,location,website,email);
+    const placeholders = '%L, %L, %L, %L, %L, $w, $s, $f, $c'
+    let q = escape('INSERT INTO repos %s VALUES (' + placeholders + ')',
+      fields, url, description, website, tags, langs.join(','));
       // for some reason pg-escape does not play well with integers ...
       // see: https://github.com/segmentio/pg-escape/issues/15
       // so we are manually replacing the values:
-      q = q.replace('$1', parseInt(uid, 10));
-      q = q.replace('$p', parseInt(pcount, 10));
-    // console.log('L93: query:', q);
+      q = q.replace('$w', parseInt(watchers, 10))
+        .replace('$s', parseInt(stars, 10))
+        .replace('$f', parseInt(forks, 10))
+        .replace('$c', parseInt(commits, 10));
 
-    PG_CLIENT.query(q, function(err, result) {
+    // console.log('L121: query:', q);
+
+    PG_CLIENT.query(q, function(error, result) {
+      utils.log_error(error, data, new Error().stack);
       return insert_next_page (data, callback);
     });
   });
@@ -160,6 +150,9 @@ function insert_next_page (data, callback) {
       urls.push(data.url + '?tab=repositories');
       break;
     // add more here
+    case 'repo':
+      urls.push(data.url + '/stargazers');
+      break;
   }
   let len = urls.length;
   // console.log('urls.length:', len);
@@ -167,9 +160,9 @@ function insert_next_page (data, callback) {
   urls.filter((e) => e !== null) // filter out blanks (if next_page is null)
   .forEach((next, i) => { // poor person's "async parallel":
     // console.log(i, next);
-    insert_log_item(data.url, next, (err, data2) => {
+    insert_log_item(data.url, next, (error, data2) => {
       if(--len == 0) {
-        return exec_cb (callback, null, data);
+        return utils.exec_cb(callback, null, data);
       }
     })
   });
@@ -186,9 +179,9 @@ function insert_log_item (path, next_page, callback) {
     const query = escape(`INSERT INTO logs (path, next_page) VALUES (%L, %L)`,
       path, next_page);
     // console.log('L66: query:', query);
-    PG_CLIENT.query(query, function(err, result) {
-      // console.log(err, result);
-      return exec_cb (callback, err, result);
+    PG_CLIENT.query(query, function(error, data) {
+      utils.log_error(error, data, new Error().stack);
+      return utils.exec_cb(callback, error, data);
     });
   });
 }
@@ -202,9 +195,9 @@ function select_next_page (callback) {
                ORDER BY id ASC
                LIMIT 1`);
     // console.log('L82: query:', q);
-    PG_CLIENT.query(q, function(err, result) {
-      // console.log('L84:', err, result);
-      return exec_cb (callback, err, result);
+    PG_CLIENT.query(q, function(error, data) {
+      utils.log_error(error, data, new Error().stack);
+      return utils.exec_cb(callback, error, data);
     });
   });
 }
@@ -212,7 +205,6 @@ function select_next_page (callback) {
 module.exports = {
   connect: connect,
   end: end,
-  exec_cb: exec_cb,
   insert_log_item: insert_log_item,
   select_next_page: select_next_page,
   insert_person: insert_person,

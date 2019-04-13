@@ -12,27 +12,29 @@ CREATE TABLE IF NOT EXISTS "people" (
 
 /* insert a person into the people table if it does not already exist */
 /* stackoverflow.com/questions/4069718/postgres-insert-if-does-not-exist */
-INSERT INTO people (name, username, company)
-  SELECT name, username, company FROM people
+INSERT INTO people (name, username, worksfor, uid)
+  SELECT name, username, worksfor, uid FROM people
   UNION
   VALUES (
     'Jimmy Testuser',
     'jimmy',
-    'Great!'
+    'Great!',
+		99
   )
   EXCEPT
-  SELECT name, username, company FROM people;
+  SELECT name, username, worksfor, uid FROM people;
 
-INSERT INTO people (name, username, company)
-  SELECT name, username, company FROM people
+INSERT INTO people (name, username, worksfor, uid)
+  SELECT name, username, worksfor, uid FROM people
   UNION
   VALUES (
     'Ron Swanson',
     'dukesilver',
-    'OfferManWood'
+    'OfferManWood',
+		123
   )
   EXCEPT
-  SELECT name, username, company FROM people;
+  SELECT name, username, worksfor, uid FROM people;
 
 CREATE TABLE IF NOT EXISTS "followers" (
   "inserted_at" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -113,6 +115,7 @@ CREATE TABLE IF NOT EXISTS "repos" (
 	"forks" INT DEFAULT 0,
 	"commits" INT DEFAULT 0,
 	"langs" VARCHAR(255) DEFAULT NULL,
+	"tags" TEXT DEFAULT NULL,
 	"person_id" INT REFERENCES people (id), -- can be NULL if repo belongs to org.
     CONSTRAINT "repos_fk0"
     FOREIGN KEY ("person_id")

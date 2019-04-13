@@ -11,6 +11,13 @@
   "uid": 11708465,
   "entries": [
     {
+      "name": "learn-json-web-tokens",
+      "lang": "JavaScript",
+      "url": "/dwyl/learn-json-web-tokens",
+      "description": "🔐 Learn how to use JSON Web Token (JWT) to secure your next Web App! (Tutorial/Example with Tests!!)",
+      "updated": "2019-04-12T19:27:47Z"
+    },
+    {
       "name": "learn-postgresql",
       "lang": "",
       "url": "/dwyl/learn-postgresql",
@@ -212,13 +219,6 @@
       "url": "/dwyl/product-owner-guide",
       "description": "🚀 A rough guide for people working with dwyl as Product Owners",
       "updated": "2019-03-05T15:01:05Z"
-    },
-    {
-      "name": "learn-tdd",
-      "lang": "JavaScript",
-      "url": "/dwyl/learn-tdd",
-      "description": "✅ A brief introduction to Test Driven Development (TDD) in JavaScript (Complete Beginner's Step-by-Step Tutorial)",
-      "updated": "2019-02-25T17:01:02Z"
     }
   ],
   "next_page": "/dwyl?page=2"
