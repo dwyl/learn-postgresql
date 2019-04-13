@@ -1,17 +1,14 @@
 {
-  "url": "/dwyl/todo-list-javascript-tutorial",
+  "url": "/dwyl/health",
   "type": "repo",
-  "description": "✅ A step-by-step complete beginner example/tutorial for building a Todo List App (TodoMVC) from scratch in JavaScript following Test Driven Development (TDD) best practice. 🌱",
-  "website": "https://todomvc-app.herokuapp.com",
-  "tags": "learn, how-to, todolist, todomvc, beginner, beginners-guide, tutorial, javascript, elm-architecture, test-driven-development, tdd, best-practices, step-by-step, vanilla",
-  "watchers": 211,
-  "stars": 69,
-  "forks": 12,
-  "commits": 301,
+  "description": "🍏 🍋 🍓 🍐 🍌 🍍 🍉 🍒",
+  "website": "",
+  "tags": "read, the, issues",
+  "watchers": 3,
+  "stars": 6,
+  "forks": 0,
+  "commits": 1,
   "branches": 1,
   "releases": 0,
-  "langs": [
-    "JavaScript 87.6%",
-    "CSS 9.5%"
-  ]
+  "langs": []
 }

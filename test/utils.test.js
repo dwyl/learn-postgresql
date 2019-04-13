@@ -1,7 +1,7 @@
 const tap = require('tap'); // see: github.com/dwyl/learn-tape
 const utils = require('../server/utils');
 
-tap.only('utils.log_error', function testfn (t) {
+tap.test('utils.log_error', function testfn (t) {
   const error = 'DON\'T PANIC! This is only a utils.log_error test execution ☔️'
   utils.log_error(error, { "hello": "world"}, new Error().stack);
   utils.log_error(error, { "hello": "world"});
@@ -17,4 +17,11 @@ tap.test('utils.exec_cb', function(t) {
     t.equal(data, 'hai', 'exec_cb simply executes the callback');
     t.end();
   }, error, 'hai');
+});
+
+tap.test('utils.recent_activity', function(t) {
+  const person = require('./fixtures/person.json');
+  const recent_activity = utils.recent_activity(person);
+  t.ok(recent_activity > 0, 'recent_activity: ' + recent_activity)
+  t.end();
 });

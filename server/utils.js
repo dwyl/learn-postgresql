@@ -38,7 +38,21 @@ function exec_cb (callback, error, data) {
   return;
 }
 
+/**
+ * recent_activity returns the count of recent activity for a profile
+ */
+function recent_activity(json) {
+  const DAYS = 14;
+  const keys = Object.keys(json["contrib_matrix"]);
+  const len = keys.length - 1;
+  const latest_contribs = keys.slice(- DAYS);
+  return latest_contribs.reduce((sum, k) => {
+    return sum + json["contrib_matrix"][k]['count']
+  }, 0);
+}
+
 module.exports = {
   log_error: log_error,
-  exec_cb: exec_cb
+  exec_cb: exec_cb,
+  recent_activity: recent_activity
 }

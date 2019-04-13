@@ -52,12 +52,21 @@ function end (callback) {
  */
 function insert_person (data, callback) {
   connect( function insert_person_after_connected () {
-    const { name, username, bio, worksfor, location, website, uid } = data;
-    const fields = '(name, username, bio, worksfor, location, website, uid)';
-    let q = escape('INSERT INTO people %s VALUES (%L, %L, %L, %L, %L, %L, $1)',
+    const { name, username, bio, worksfor, location, website, uid,
+      stars, followers, following, contribs } = data;
+    const fields = `(name, username, bio, worksfor, location, website, uid,
+      stars, followers, following, contribs, recent_activity)`;
+    let q = escape(`INSERT INTO people %s
+      VALUES (%L, %L, %L, %L, %L, %L, $u, $s, $f, $g, $c, $r)`,
       fields, name, username, bio, worksfor, location, website);
-      q = q.replace('$1', parseInt(uid, 10));
-    // console.log('L72: insert_person query:', q);
+      q = q.replace('$u', parseInt(uid, 10))
+        .replace('$s', parseInt(stars, 10))
+        .replace('$f', parseInt(followers, 10))
+        .replace('$g', parseInt(following, 10))
+        .replace('$c', parseInt(contribs, 10))
+        .replace('$r', utils.recent_activity(data));
+
+    console.log('L69: insert_person query:', q);
 
     PG_CLIENT.query(q, function(error, result) {
       utils.log_error(error, data, new Error().stack);
@@ -65,6 +74,8 @@ function insert_person (data, callback) {
     });
   });
 }
+
+
 
 /**
  * insert_org saves an org's data to the orgs table.
@@ -128,6 +139,24 @@ function insert_repo (data, callback) {
 }
 
 /**
+ * select_repo saves the list of people who have starred a repo to "stars".
+ * @param {string} url - url of the repo (e.g: /dwyl/start-here)
+ * @param {function} callback - callback function to be executed on success.
+ */
+function select_repo (url, callback) {
+  connect( function select_repo_after_connected () {
+    let q = escape(`SELECT * FROM repos WHERE url = %L LIMIT 1`,
+      url.replace('/stargazers', ''));
+    console.log('207 q:', q);
+    PG_CLIENT.query(q, function(error, result) {
+      utils.log_error(error, result, new Error().stack);
+      return utils.exec_cb(callback, error, result);
+    });
+  });
+}
+
+
+/**
  * insert_next_page inserts the list of next pages to be crawled.
  * @param {Object} data - a valid JSON object containing data to be inserted.
  * @param {function} callback - callback function to be executed on success.
@@ -153,11 +182,14 @@ function insert_next_page (data, callback) {
     case 'repo':
       urls.push(data.url + '/stargazers');
       break;
+    case 'stars':
+      urls.push(data.next_page);
+      break;
   }
   let len = urls.length;
   urls.filter((e) => e !== null) // filter out blanks (if next_page is null)
-  .forEach((next, i) => { // poor person's "async parallel":
-    insert_log_item(data.url, next, (error, data2) => {
+  .forEach((next_page, i) => { // poor person's "async parallel":
+    insert_log_item(data.url, next_page, (error, data2) => {
       if(--len == 0) {
         return utils.exec_cb(callback, null, data);
       }
@@ -167,7 +199,9 @@ function insert_next_page (data, callback) {
 
 /**
  * insert_log_item does exactly what it's name suggests inserts a log enty.
- *
+ * @param {String} path - the current path (page) being viewed.
+ * @param {String} next_page - the next page to be fetched.
+ * @param {function} callback - callback function to be executed on success.
  */
 function insert_log_item (path, next_page, callback) {
   connect( function () {
@@ -180,6 +214,25 @@ function insert_log_item (path, next_page, callback) {
     });
   });
 }
+
+/**
+ * insert_stars saves the list of people who have starred a repo to "stars".
+ * @param {object} data - a valid JSON object containing data to be inserted.
+ * @param {function} callback - callback function to be executed on success.
+ */
+function insert_stars (data, callback) {
+  connect( function select_repo_after_connected () {
+    const url = data.url.replace('/stargazers', '');
+    let q = escape(`SELECT * FROM repos WHERE url = %L`, url);
+    PG_CLIENT.query(q, function(error, result) {
+      utils.log_error(error, data, new Error().stack);
+      console.log(error, result);
+      return insert_next_page (data, callback);
+    });
+  });
+}
+
+
 
 /**
  * select_next_page get the next path (page) to crawl
@@ -210,6 +263,7 @@ module.exports = {
   end: end,
   insert_log_item: insert_log_item,
   select_next_page: select_next_page,
+  select_repo: select_repo,
   insert_person: insert_person,
   insert_org: insert_org,
   insert_repo: insert_repo,

@@ -9,11 +9,16 @@ const seed = Math.floor(Math.random() * Math.floor(100000));
 const path = '/dwyl';
 
 tap.test('db.select_next_page selects next_page to be viewed', function(t) {
-  db.insert_log_item(path, path + seed, function (err, result) {
-    const select = escape('SELECT * FROM logs ORDER by id DESC LIMIT 1');
-    db.PG_CLIENT.query(select, function(err, result) {
-      t.equal(result.rows[0].path, path, 'logs.path is ' + path);
-      t.end();
+  db.PG_CLIENT.query('TRUNCATE TABLE logs', function (err0, result0) {
+    t.equal(err0, null, 'no error running "TRUNCATE TABLE logs"');
+    t.equal(result0.command, 'TRUNCATE', 'logs table successfully truncated');
+
+    db.insert_log_item(path, path + seed, function (err, result) {
+      const select = escape('SELECT * FROM logs ORDER by id DESC LIMIT 1');
+      db.PG_CLIENT.query(select, function(err, result) {
+        t.equal(result.rows[0].path, path, 'logs.path is ' + path);
+        t.end();
+      });
     });
   });
 });
@@ -61,19 +66,12 @@ tap.test('insert_org', function(t) {
   });
 });
 
-tap.test('insert_repo', function(t) {
+tap.test('select_repo', function(t) {
   const repo = require('./fixtures/repo.json');
-  // given that we have a uniqueness constraint on the name and uid fields
-  // we must TRUNCATE the orgs table when running tests:
-  db.PG_CLIENT.query('TRUNCATE TABLE repos CASCADE', function (err2, result2) {
-
-    db.insert_repo(repo, function (err, result) {
-
-      const select = escape('SELECT * FROM repos ORDER by id DESC LIMIT 1');
-      db.PG_CLIENT.query(select, function(err, result) {
-        t.equal(result.rows[0].url, repo.url, 'repo.url ' + repo.url);
-        t.end();
-      });
+  db.insert_repo(repo, function (err, result) {
+    db.select_repo(repo.url, function (err1, result1) {
+      t.equal(result1.rows[0].url, repo.url, 'repo.url ' + repo.url);
+      t.end();
     });
   });
 });

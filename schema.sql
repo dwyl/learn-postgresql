@@ -2,12 +2,17 @@ CREATE TABLE IF NOT EXISTS "people" (
 	"inserted_at" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	"id" SERIAL PRIMARY KEY,
 	"name" VARCHAR(50) DEFAULT NULL,
-	"username" VARCHAR(50) NOT NULL UNIQUE,
+	"username" VARCHAR(50) NOT NULL,
 	"bio" VARCHAR(255) DEFAULT NULL,
 	"worksfor" VARCHAR(50) DEFAULT NULL,
-  "uid" INT NOT NULL UNIQUE, -- the person's GitHub uid e.g: 4185328
+  "uid" INT NOT NULL, -- the person's GitHub uid e.g: 4185328
   "location" VARCHAR(100) DEFAULT NULL,
-	"website" VARCHAR(255) DEFAULT NULL
+	"website" VARCHAR(255) DEFAULT NULL,
+	"stars" INT DEFAULT 0,
+	"followers" INT DEFAULT 0,
+	"following" INT DEFAULT 0,
+	"contribs" INT DEFAULT 0,
+	"recent_activity" INT DEFAULT 0
 );
 
 /* insert a person into the people table if it does not already exist */
@@ -68,7 +73,7 @@ CREATE TABLE IF NOT EXISTS "orgs" (
   "website" VARCHAR(255) DEFAULT NULL,
   "email" VARCHAR(255) DEFAULT NULL,
   "pcount" INT DEFAULT 0,
-  "uid" INT NOT NULL UNIQUE
+  "uid" INT NOT NULL
 );
 
 INSERT INTO orgs (url, username)
