@@ -34,17 +34,11 @@ tap.test('db.select_next_page selects next_page to be viewed', function(t) {
 
 tap.test('insert_person insert test/fixtures/person.json data', function(t) {
   const person = require('./fixtures/person.json');
-  console.log(person.url);
-  // we must TRUNCATE the orgs table when running tests:
-  db.PG_CLIENT.query('TRUNCATE TABLE people CASCADE', function (err2, result2) {
-
-    db.insert_person(person, function (err, result) {
-      db.select_person(person.username, function(err, result) {
-        t.equal(result.rows[0].name, person.name, 'person.name ' + person.name);
-        t.end();
-      });
+  db.insert_person(person, function (err, result) {
+    db.select_person(person.username, function(err, result) {
+      t.equal(result.rows[0].name, person.name, 'person.name ' + person.name);
+      t.end();
     });
-
   });
 });
 
@@ -72,6 +66,18 @@ tap.test('select_repo', function(t) {
       t.equal(result1.rows[0].url, repo.url, 'repo.url ' + repo.url);
       t.end();
     });
+  });
+});
+
+tap.test('insert_stars', function(t) {
+  const stars = require('./fixtures/stargazers.json');
+  db.insert_stars(stars, function (err, result) {
+    // console.log(err, result);
+
+    // db.select_repo(repo.url, function (err1, result1) {
+      // t.equal(result1.rows[0].url, repo.url, 'repo.url ' + repo.url);
+      t.end();
+    // });
   });
 });
 

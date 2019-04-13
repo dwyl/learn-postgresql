@@ -83,10 +83,10 @@ function insert_person (data, callback) {
 function select_person (username, callback) {
   connect( function select_person_after_connected () {
     let q = escape(`SELECT * FROM people WHERE username = %L
-      ORDER BY id ASC LIMIT 1`,
-      username.replace('/followers', '').split('?')[0]);
-    // console.log('L151 q:', q);
+      ORDER BY id ASC LIMIT 1`, username);
+    // console.log('L87 q:', q);
     PG_CLIENT.query(q, function(error, result) {
+      // console.log(error, result.rows[0]);
       utils.log_error(error, result, new Error().stack);
       return utils.exec_cb(callback, error, result);
     });
@@ -166,7 +166,7 @@ function select_repo (url, callback) {
     let q = escape(`SELECT * FROM repos WHERE url = %L
       ORDER BY id ASC LIMIT 1`,
       url.replace('/stargazers', ''));
-    // console.log('L151 q:', q);
+    // console.log('L168 q:', q);
     PG_CLIENT.query(q, function(error, result) {
       utils.log_error(error, result, new Error().stack);
       return utils.exec_cb(callback, error, result);
@@ -240,13 +240,29 @@ function insert_log_item (path, next_page, callback) {
  * @param {function} callback - callback function to be executed on success.
  */
 function insert_stars (data, callback) {
-  connect( function select_repo_after_connected () {
-    const url = data.url.replace('/stargazers', '');
-    let q = escape(`SELECT * FROM repos WHERE url = %L`, url);
-    PG_CLIENT.query(q, function(error, result) {
-      utils.log_error(error, data, new Error().stack);
-      console.log(error, result);
-      return insert_next_page (data, callback);
+  select_repo(data.url, function (error, result) {
+    const repo_id = result.rows[0].id;
+    // console.log('repo_id:', repo_id);
+    let len = data.entries.length - 1;
+    data.entries.forEach((p, i) => { // poor person's "async parallel":
+      const username = p.username;
+      // console.log('username:', username);
+      select_person(username, function(error1, result1) {
+        // console.log('L251 > result1: ', result1.rows[0]);
+        const person_id = result1.rows[0].id;
+        const fields = '(person_id, repo_id)';
+        let q = escape(`INSERT INTO stars %s VALUES ($pid, $rid)`, fields);
+        q = q.replace('$pid', person_id)
+         .replace('$rid', repo_id);
+        // console.log('L257 q:', q);
+        PG_CLIENT.query(q, function(error2, result2) {
+          utils.log_error(error2, result2, new Error().stack);
+
+          if(i === len) {
+            return insert_next_page(data, callback);
+          }
+        });
+      });
     });
   });
 }
@@ -287,5 +303,6 @@ module.exports = {
   insert_org: insert_org,
   insert_repo: insert_repo,
   select_repo: select_repo,
+  insert_stars: insert_stars,
   PG_CLIENT: PG_CLIENT
 }
