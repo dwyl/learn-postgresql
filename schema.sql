@@ -104,7 +104,14 @@ INSERT INTO members (person_id, org_id)
 CREATE TABLE IF NOT EXISTS "repos" (
 	"inserted_at" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   "id" SERIAL PRIMARY KEY,
-	"name" VARCHAR(255) NOT NULL, -- know what the char limit is for a repo name?
+	"url" VARCHAR(255) NOT NULL, -- know what the char limit is for a repo name?
+	"description" TEXT DEFAULT NULL,
+	"website" VARCHAR(255) DEFAULT NULL,
+	"watchers" INT DEFAULT 0,
+	"stars" INT DEFAULT 0,
+	"forks" INT DEFAULT 0,
+	"commits" INT DEFAULT 0,
+	"langs" VARCHAR(255) DEFAULT NULL,
 	"person_id" INT REFERENCES people (id), -- can be NULL if repo belongs to org.
     CONSTRAINT "repos_fk0"
     FOREIGN KEY ("person_id")
@@ -114,6 +121,7 @@ CREATE TABLE IF NOT EXISTS "repos" (
     FOREIGN KEY ("org_id")
     REFERENCES orgs (id)
 );
+
 
 CREATE TABLE IF NOT EXISTS "stars" (
   "inserted_at" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
