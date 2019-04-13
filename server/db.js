@@ -11,11 +11,9 @@ console.log('db.js:L7: PG_CLIENT._connecting:', PG_CLIENT._connecting, // debug
 
 // auto-start pg connection when module is required so startup is faster!
 connect(function (err, data) {
-  console.log('db.js:L12: PG_CLIENT._connected:', PG_CLIENT._connected); // confirm
+  console.log('db.js:L12: PG_CLIENT._connected:', PG_CLIENT._connected);
   console.log('- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -');
 })
-
-
 
 /**
  * connnect ensures that a postgres connection is available before continuing
@@ -34,6 +32,10 @@ function connect (callback) {
   }
 }
 
+/**
+ * end used in testing to end/close the Postgres connection:
+ * @param {function} callback - callback function to be executed on success.
+ */
 function end (callback) {
   /* istanbul ignore else */
   if(PG_CLIENT && PG_CLIENT._connected && !PG_CLIENT._connecting) {
@@ -45,14 +47,12 @@ function end (callback) {
 
 /**
  * insert_person saves a person's data to the people table.
- *
+ * @param {object} data - a valid JSON object containing data to be inserted.
+ * @param {function} callback - callback function to be executed on success.
  */
 function insert_person (data, callback) {
-  // console.log('db.js:L58: person', person);
-  connect( function () {
+  connect( function insert_person_after_connected () {
     const { name, username, bio, worksfor, location, website, uid } = data;
-    // console.log('name:', name, '| username:', username, '| worksfor:', worksfor,
-    // ' | bio: ', bio, '| uid:', uid, '| location:', location);
     const fields = '(name, username, bio, worksfor, location, website, uid)';
     let q = escape('INSERT INTO people %s VALUES (%L, %L, %L, %L, %L, %L, $1)',
       fields, name, username, bio, worksfor, location, website);
@@ -73,8 +73,7 @@ function insert_person (data, callback) {
 function insert_org (data, callback) {
   const fields = '(' + [ "url", "name", "description", "location",
   "website", "email", "pcount", "uid"].join(',') + ')';
-  // console.log('db.js:L58: person', person);
-  connect( function () {
+  connect( function insert_org_after_connected () {
     const { url,name,description,location,website,email,pcount,uid } = data;
     // console.log(fields, name, username, company, uid, location);
     const placeholders = '%L, %L, %L, %L, %L, %L, $p, $1'
@@ -96,14 +95,15 @@ function insert_org (data, callback) {
 
 /**
  * insert_repo saves an repo's stats to the repos table.
- *
+ * @param {object} data - a valid JSON object containing data to be inserted.
+ * @param {function} callback - callback function to be executed on success.
  */
 function insert_repo (data, callback) {
 
   const fields = '(' + [ "url", "description", "website", "tags", "langs",
   "watchers", "stars", "forks", "commits"].join(',') + ')';
   // console.log('db.js:L105: insert_repo > data', Object.keys(data).join(','));
-  connect( function () {
+  connect( function insert_repo_after_connected () {
     const { url, description, website, tags, langs, // string data
       watchers, stars, forks, commits} = data; // int data
     // console.log(fields, name, username, company, uid, location);
@@ -130,6 +130,7 @@ function insert_repo (data, callback) {
 /**
  * insert_next_page inserts the list of next pages to be crawled.
  * @param {Object} data - a valid JSON object containing data to be inserted.
+ * @param {function} callback - callback function to be executed on success.
  */
 function insert_next_page (data, callback) {
   let urls = []
@@ -185,9 +186,17 @@ function insert_log_item (path, next_page, callback) {
  */
 function select_next_page (callback) {
   connect( function () {
-    const q = escape(`SELECT * FROM logs
-               ORDER BY id ASC
-               LIMIT 1`);
+    const q = escape(`SELECT next_page, COUNT (next_page) AS c
+    FROM logs
+    WHERE next_page IS NOT null
+    AND next_page NOT IN (
+      SELECT path
+      FROM logs
+      WHERE path IS NOT NULL
+    )
+    GROUP BY next_page
+    ORDER BY c ASC
+    LIMIT 1;`);
     // console.log('L82: query:', q);
     PG_CLIENT.query(q, function(error, data) {
       utils.log_error(error, data, new Error().stack);

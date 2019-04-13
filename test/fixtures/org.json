@@ -11,11 +11,18 @@
   "uid": 11708465,
   "entries": [
     {
+      "name": "learn-hapi",
+      "lang": "HTML",
+      "url": "/dwyl/learn-hapi",
+      "description": "☀️ Learn to use Hapi.js (Node.js) web framework to build scalable apps in less time",
+      "updated": "2019-04-13T14:23:26Z"
+    },
+    {
       "name": "learn-postgresql",
       "lang": "",
       "url": "/dwyl/learn-postgresql",
       "description": "🐘 Learn how to use PostgreSQL and Structured Query Language (SQL) to store and query your relational data. 🔍",
-      "updated": "2019-04-13T12:47:42Z"
+      "updated": "2019-04-13T14:10:50Z"
     },
     {
       "name": "learn-json-web-tokens",
@@ -44,13 +51,6 @@
       "url": "/dwyl/hapi-error",
       "description": "☔️ Intercept errors in your Hapi Web App/API and send a *useful* message to the client OR redirect to the desired endpoint.",
       "updated": "2019-04-07T12:52:07Z"
-    },
-    {
-      "name": "learn-hapi",
-      "lang": "HTML",
-      "url": "/dwyl/learn-hapi",
-      "description": "☀️ Learn to use Hapi.js (Node.js) web framework to build scalable apps in less time",
-      "updated": "2019-04-02T23:27:16Z"
     },
     {
       "name": "home",

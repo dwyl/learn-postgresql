@@ -6,10 +6,10 @@ const escape = require('pg-escape'); // npmjs.com/package/pg-escape santise Q's
 const db = require('../server/db');
 
 const seed = Math.floor(Math.random() * Math.floor(100000));
-const path = 'dwyl' + seed;
+const path = '/dwyl';
 
 tap.test('db.select_next_page selects next_page to be viewed', function(t) {
-  db.insert_log_item(path, null, function (err, result) {
+  db.insert_log_item(path, path + seed, function (err, result) {
     const select = escape('SELECT * FROM logs ORDER by id DESC LIMIT 1');
     db.PG_CLIENT.query(select, function(err, result) {
       t.equal(result.rows[0].path, path, 'logs.path is ' + path);
@@ -20,11 +20,9 @@ tap.test('db.select_next_page selects next_page to be viewed', function(t) {
 
 tap.test('db.select_next_page selects next_page to be viewed', function(t) {
   db.select_next_page(function (err, result) {
-    const select = escape('SELECT * FROM logs ORDER by id DESC LIMIT 1');
-    db.PG_CLIENT.query(select, function(err, result) {
-      t.equal(result.rows[0].path, path, 'next page is ' + path);
-      t.end();
-    });
+    t.equal(result.rows[0].next_page, path + seed,
+      'next_page is: ' + result.rows[0].next_page);
+    t.end();
   });
 });
 
