@@ -39,9 +39,10 @@ function fetch_list_of_profiles_slowly (data, callback) {
       gs(username, function process (error, profile) {
 
         console.log(error, profile.name);
-        // delete(profile.contrib_matrix);
+
         db.insert_person(profile, function (err2, data2) {
-          console.log(i, len, err2, data2.username);
+          // console.log(i, len, err2, data2.username);
+          
           if(i == len - 1) {
             return utils.exec_cb(callback, null, data);
           }
