@@ -15,14 +15,6 @@ CREATE TABLE IF NOT EXISTS "people" (
 	"recent_activity" INT DEFAULT 0
 );
 
-CREATE TABLE IF NOT EXISTS "relationships" (
-  "inserted_at" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  "person_id" INT REFERENCES people (id) DEFAULT NULL,
-  "leader_id" INT REFERENCES people (id) DEFAULT NULL,
-  "org_id" INT REFERENCES orgs (id) DEFAULT NULL,
-  "repo_id" INT REFERENCES repos (id) DEFAULT NULL
-);
-
 CREATE TABLE IF NOT EXISTS "orgs" (
   "inserted_at" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   "id" SERIAL PRIMARY KEY,
@@ -57,4 +49,12 @@ CREATE TABLE IF NOT EXISTS "logs" (
   "inserted_at" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   "path" VARCHAR(255) NOT NULL,
 	"next_page" VARCHAR(255) DEFAULT NULL
+);
+
+CREATE TABLE IF NOT EXISTS "relationships" (
+  "inserted_at" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  "person_id" INT REFERENCES people (id) DEFAULT NULL,
+  "leader_id" INT REFERENCES people (id) DEFAULT NULL,
+  "org_id" INT REFERENCES orgs (id) DEFAULT NULL,
+  "repo_id" INT REFERENCES repos (id) DEFAULT NULL
 );
