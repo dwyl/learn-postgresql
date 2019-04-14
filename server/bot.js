@@ -2,7 +2,6 @@ const db = require('./db');
 const utils = require('./utils');
 const gs = require('github-scraper');
 
-
 function fetch (path, callback) {
   gs(path, function(error, data) {
     if (error) { // don't bother trying to save data if an error occurred

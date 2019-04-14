@@ -1,5 +1,4 @@
 const tap = require('tap');
-const escape = require('pg-escape');
 const bot = require('../server/bot');
 const db = require('../server/db');
 const seed = Math.floor(Math.random() * Math.floor(100000));
@@ -10,7 +9,6 @@ tap.test('crawl non-existent page to test 404', function (t) {
     t.end()
   });
 });
-
 
 tap.test('crawl @dwyl org', function (t) {
   // we must TRUNCATE the orgs table when running tests:
@@ -50,7 +48,7 @@ tap.test('crawl dwyl/todo-list-javascript-tutorial', function (t) {
     });
   }); // end TRUNCATE
 });
-//
+
 tap.test('crawl dwyl/health', function (t) {
   // db.PG_CLIENT.query('TRUNCATE TABLE repos CASCADE', function (err0, result0) {
     // t.equal(err0, null, 'no error running "TRUNCATE TABLE repos"');
@@ -59,13 +57,12 @@ tap.test('crawl dwyl/health', function (t) {
     bot.fetch('dwyl/health', function(err, data) {
       require('./fixtures/make-fixture')('repo.json', data);
 
-      const select = escape('SELECT * FROM repos ORDER by id DESC LIMIT 1');
+      const select = 'SELECT * FROM repos ORDER by id DESC LIMIT 1';
       db.PG_CLIENT.query(select, function(err, result) {
         t.equal(result.rows[0].url, data.url, 'repo.url ' + data.url);
         t.end();
       });
     });
-
   // }); // end TRUNCATE
 });
 

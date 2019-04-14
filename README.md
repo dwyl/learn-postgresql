@@ -145,9 +145,10 @@ can be summarised in *one word*: **WordPress**.
 > WordPress has a firm grip on the CMS-based website market
 and it shows no sign of slowing down.
 > If your goal is to build CMS-based websites,
-or the company you _already_ work for uses WordPress,
+or the company you _already_ work for uses
+[WordPress](https://www.cvedetails.com/vendor/2337/Wordpress.html),
 you should go for it!
-> If you prefere a more _general_ introduction to SQL,
+> If you prefer a more _general_ introduction to SQL,
 > follow _this_ tutorial!
 > The knowledge you will gain by learning Postgres is 95%+
 "_transferable_" to other SQL databases so don't worry about

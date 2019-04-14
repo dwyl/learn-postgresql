@@ -2,7 +2,6 @@ process.env.DATABASE_URL = process.env.DATABASE_URL
   || "postgres://postgres:@localhost/codeface";
 
 const tap = require('tap'); // see: github.com/dwyl/learn-tape
-const escape = require('pg-escape'); // npmjs.com/package/pg-escape santise Q's
 const db = require('../server/db');
 
 const seed = Math.floor(Math.random() * Math.floor(100000));
@@ -14,8 +13,9 @@ tap.test('db.select_next_page selects next_page to be viewed', function(t) {
     t.equal(result0.command, 'TRUNCATE', 'logs table successfully truncated');
 
     db.insert_log_item(path, path + seed, function (err, result) {
-      const select = escape('SELECT * FROM logs ORDER by id DESC LIMIT 1');
+      const select = 'SELECT * FROM logs ORDER by id DESC LIMIT 1';
       db.PG_CLIENT.query(select, function(err, result) {
+        // console.log(result);
         t.equal(result.rows[0].path, path, 'logs.path is ' + path);
         t.end();
       });
@@ -49,7 +49,7 @@ tap.test('insert_org', function(t) {
   db.PG_CLIENT.query('TRUNCATE TABLE orgs CASCADE', function (err2, result2) {
 
     db.insert_org(org, function (err, result) {
-      const select = escape('SELECT * FROM orgs ORDER by id DESC LIMIT 1');
+      const select = 'SELECT * FROM orgs ORDER by id DESC LIMIT 1';
       db.PG_CLIENT.query(select, function(err, result) {
         t.equal(result.rows[0].uid, org.uid, 'org.uid ' + org.uid);
         t.equal(result.rows[0].name, org.name, 'org.name ' + org.name);

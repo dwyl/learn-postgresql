@@ -36,8 +36,7 @@
   "homepage": "https://github.com/dwyl/learn-postgresql#readme",
   "dependencies": {
     "github-scraper": "^6.6.6",
-    "pg": "^7.8.1",
-    "pg-escape": "^0.2.0"
+    "pg": "^7.8.1"
   },
   "devDependencies": {
     "faster": "^3.5.1",
