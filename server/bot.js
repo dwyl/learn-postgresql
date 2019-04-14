@@ -48,7 +48,7 @@ function fetch_list_of_profiles_slowly (data, next, callback) {
 
         db.insert_person(profile, function (err2, data2) {
 
-          if(i == len - 1) {
+          if (i == len - 1) {
             return next(data, callback); // only called once per batch.
           }  // e.g: db.insert_stars(data, callback) in the case of 'stars' page
         });
