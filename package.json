@@ -43,16 +43,14 @@
     "nyc": "^13.1.0",
     "supertest": "^4.0.2",
     "tap": "^12.6.1",
-    "tap-nyc": "^1.0.3",
-    "tap-spec": "^5.0.0",
-    "terminate": "^2.1.2"
+    "tap-nyc": "^1.0.3"
   },
   "nyc": {
     "check-coverage": true,
-    "lines": 50,
-    "statements": 50,
-    "functions": 50,
-    "branches": 50,
+    "lines": 100,
+    "statements": 100,
+    "functions": 100,
+    "branches": 100,
     "include": [
       "server/*.js"
     ],
@@ -63,7 +61,9 @@
       "lcov",
       "text-summary"
     ],
-    "cache": false,
+    "cacheDirectories": [
+      "node_modules"
+    ],
     "all": true,
     "report-dir": "./coverage"
   }
