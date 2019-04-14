@@ -197,7 +197,6 @@ function insert_next_page (data, callback) {
       urls.push(data.url + '/following');
       urls.push(data.url + '?tab=repositories');
       break;
-    // add more here
     case 'repo':
       urls.push(data.url + '/stargazers');
       break;
@@ -217,7 +216,7 @@ function insert_next_page (data, callback) {
 }
 
 /**
- * insert_log_item does exactly what it's name suggests inserts a log enty.
+ * insert_log_item does exactly what it's name suggests inserts a log enty
  * @param {String} path - the current path (page) being viewed.
  * @param {String} next_page - the next page to be fetched.
  * @param {function} callback - callback function to be executed on success.
@@ -235,11 +234,11 @@ function insert_log_item (path, next_page, callback) {
 }
 
 /**
- * insert_stars saves the list of people who have starred a repo to "stars".
+ * insert_relationship saves the list of people who related to another record.
  * @param {object} data - a valid JSON object containing data to be inserted.
  * @param {function} callback - callback function to be executed on success.
  */
-function insert_stars (data, callback) {
+function insert_relationship (data, callback) {
   select_repo(data.url, function (error, result) {
     const repo_id = result.rows[0].id;
     // console.log('repo_id:', repo_id);
@@ -250,8 +249,8 @@ function insert_stars (data, callback) {
       select_person(username, function(error1, result1) {
         // console.log('L251 > result1: ', result1.rows[0]);
         const person_id = result1.rows[0].id;
-        const fields = '(person_id, repo_id)';
-        let q = escape(`INSERT INTO stars %s VALUES ($pid, $rid)`, fields);
+        const table_fields = 'relationships (person_id, repo_id)';
+        let q = escape(`INSERT INTO %s VALUES ($pid, $rid)`, table_fields);
         q = q.replace('$pid', person_id)
          .replace('$rid', repo_id);
         // console.log('L257 q:', q);
@@ -303,6 +302,6 @@ module.exports = {
   insert_org: insert_org,
   insert_repo: insert_repo,
   select_repo: select_repo,
-  insert_stars: insert_stars,
+  insert_relationship: insert_relationship,
   PG_CLIENT: PG_CLIENT
 }

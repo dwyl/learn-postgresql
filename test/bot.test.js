@@ -19,7 +19,7 @@ tap.test('crawl @dwyl org', function (t) {
     t.equal(result0.command, 'TRUNCATE', 'orgs table successfully truncated');
 
     bot.fetch('dwyl', function(err, data) {
-      require('./fixtures/make-fixture')('org.json', data);
+      require('./fixtures/make-fixture')('org.json', data); // keep up-to-date
       t.end();
     });
   });

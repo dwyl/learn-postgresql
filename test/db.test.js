@@ -69,9 +69,9 @@ tap.test('select_repo', function(t) {
   });
 });
 
-tap.test('insert_stars', function(t) {
+tap.test('insert_relationship', function(t) {
   const stars = require('./fixtures/stargazers.json');
-  db.insert_stars(stars, function (err, result) {
+  db.insert_relationship(stars, function (err, result) {
     // console.log(err, result);
 
     // db.select_repo(repo.url, function (err1, result1) {

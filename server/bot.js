@@ -6,7 +6,7 @@ const gs = require('github-scraper');
 function fetch (path, callback) {
   gs(path, function(error, data) {
     if (error) { // don't bother trying to save data if an error occurred
-      utils.log_error(error, data, new Error().stack);
+      utils.log_error(error, data, new Error().stack); // get exact stack trace.
       return utils.exec_cb(callback, error, data);
     }
     console.log('data.type:', data.type, ' | data.name:', data.name);
@@ -21,7 +21,7 @@ function fetch (path, callback) {
         db.insert_repo(data, callback);
         break;
       case 'stars':
-        fetch_list_of_profiles_slowly(data, callback);
+        fetch_list_of_profiles_slowly(data, db.insert_relationship, callback);
         break;
       // case 'followers':
       //   utils.exec_cb(callback, error, data);
@@ -30,25 +30,31 @@ function fetch (path, callback) {
   })
 }
 
-function fetch_list_of_profiles_slowly (data, callback) {
+/**
+ * fetch_list_of_profiles_slowly does what it's name suggests.
+ * attempting to fetch GitHub profiles too quickly results in errors.
+ * @param {object} data - should contain url and entries (a list of people).
+ * @param {function} next - the function executed once profiles are saved.
+ * @param {function} callback - the callback function to be executed if any.
+ */
+function fetch_list_of_profiles_slowly (data, next, callback) {
   const len = data.entries.length;
-  data.entries.forEach((u, i) => { // poor person's "async parallel":
-    const username = u.username;
-    setTimeout(function () {
-      console.log('username:', username);
-      gs(username, function process (error, profile) {
 
-        console.log(error, profile.name);
+  data.entries.forEach((u, i) => { // poor person's "async parallel":
+
+    setTimeout(function delayed_request () { // delay requests to avoid errors
+
+      gs(u.username, function process (error, profile) {
+        utils.log_error(error, profile, new Error().stack);
 
         db.insert_person(profile, function (err2, data2) {
-          // console.log(i, len, err2, data2.username);
-          
+
           if(i == len - 1) {
-            return utils.exec_cb(callback, null, data);
-          }
+            return next(data, callback); // only called once per batch.
+          }  // e.g: db.insert_stars(data, callback) in the case of 'stars' page
         });
       });
-    }, i * 1000); // timer gets longer as we go.
+    }, i * 1000); // timer gets longer as i increases to avoid flooding!
   });
 }
 
