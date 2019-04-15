@@ -94,9 +94,7 @@ tap.test('crawl /dwylbot/followers (expect 1)', function (t) {
       require('./fixtures/make-fixture')('followers.json', data);
       console.log(data);
       t.equal(data.entries.length, 4, '/dwylbot/following is following Simon.');
-      db.end(() => {
-        t.end()
-      }); // close connection to database
+      t.end()
     });
   });
 });
