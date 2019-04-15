@@ -5,18 +5,18 @@ const tap = require('tap'); // see: github.com/dwyl/learn-tape
 const db = require('../server/db');
 
 const seed = Math.floor(Math.random() * Math.floor(100000));
-const path = '/dwyl';
+const url = '/dwyl';
 
 tap.test('db.select_next_page selects next_page to be viewed', function(t) {
   db.PG_CLIENT.query('TRUNCATE TABLE logs', function (err0, result0) {
     t.equal(err0, null, 'no error running "TRUNCATE TABLE logs"');
     t.equal(result0.command, 'TRUNCATE', 'logs table successfully truncated');
 
-    db.insert_log_item(path, path + seed, function (err, result) {
+    db.insert_log_item(url, url + seed, function (err, result) {
       const select = 'SELECT * FROM logs ORDER by id DESC LIMIT 1';
       db.PG_CLIENT.query(select, function(err, result) {
         // console.log(result);
-        t.equal(result.rows[0].path, path, 'logs.path is ' + path);
+        t.equal(result.rows[0].url, url, 'logs.url is ' + url);
         t.end();
       });
     });
@@ -25,7 +25,7 @@ tap.test('db.select_next_page selects next_page to be viewed', function(t) {
 
 tap.test('db.select_next_page selects next_page to be viewed', function(t) {
   db.select_next_page(function (err, result) {
-    t.equal(result.rows[0].next_page, path + seed,
+    t.equal(result.rows[0].next_page, url + seed,
       'next_page is: ' + result.rows[0].next_page);
     t.end();
   });

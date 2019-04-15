@@ -168,7 +168,7 @@ function insert_relationships (data, callback) {
   function insert_rows () { // inner function has access to outer variables
     data.entries.forEach((p, i) => { // poor person's "async parallel":
       const username = p.username;
-      console.log('username:', username);
+      // console.log('username:', username);
       select_person(username, function(error1, result1) {
         // console.log('L251 > result1: ', result1.rows[0]);
         const person_id = result1.rows[0].id;
@@ -205,7 +205,7 @@ function insert_relationships (data, callback) {
     case 'followers': // this is a list of followers/following
       fields = 'person_id, leader_id';
       username =  data.url.split('/')[1]; // /dwylbot/followers > dwylbot
-      console.log('username', username);
+      // console.log('username', username);
       // list of followers:
       select_person(username, function (error, result) {
         rel_id = result.rows[0].id;
@@ -215,7 +215,7 @@ function insert_relationships (data, callback) {
     case 'following': // pay attention to the subtle difference in fields order
       fields = 'leader_id, person_id';
       username =  data.url.split('/')[1]; // /dwylbot/following > dwylbot
-      console.log('username', username);
+      // console.log('username', username);
       // list of followers:
       select_person(username, function (error, result) {
         rel_id = result.rows[0].id;
@@ -227,14 +227,14 @@ function insert_relationships (data, callback) {
 
 /**
  * insert_log_item does exactly what it's name suggests inserts a log enty
- * @param {String} path - the current path (page) being viewed.
+ * @param {String} url - the current url (page) being viewed.
  * @param {String} next_page - the next page to be fetched.
  * @param {function} callback - callback function to be executed on success.
  */
-function insert_log_item (path, next_page, callback) {
+function insert_log_item (url, next_page, callback) {
   connect( function () {
-    const query = `INSERT INTO logs (path, next_page) VALUES ($1, $2)`;
-    const values = [path, next_page]
+    const query = `INSERT INTO logs (url, next_page) VALUES ($1, $2)`;
+    const values = [url, next_page]
     PG_CLIENT.query(query, values, function(error, data) {
       utils.log_error(error, data, new Error().stack);
       return utils.exec_cb(callback, error, data);
@@ -292,7 +292,7 @@ function insert_next_page (data, callback) {
 }
 
 /**
- * select_next_page get the next path (page) to crawl
+ * select_next_page get the next url (page) to crawl
  */
 function select_next_page (callback) {
   connect( function () {
@@ -300,9 +300,9 @@ function select_next_page (callback) {
     FROM logs
     WHERE next_page IS NOT null
     AND next_page NOT IN (
-      SELECT path
+      SELECT url
       FROM logs
-      WHERE path IS NOT NULL
+      WHERE url IS NOT NULL
     )
     GROUP BY next_page
     ORDER BY c ASC
