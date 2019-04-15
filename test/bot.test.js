@@ -69,9 +69,7 @@ tap.test('crawl dwyl/health', function (t) {
 tap.test('crawl /dwyl/health/stargazers', function (t) {
   bot.fetch('/dwyl/health/stargazers', function(err, data) {
     require('./fixtures/make-fixture')('stargazers.json', data);
-    // db.end(() => {
-      t.end()
-    // }); // close connection to database
+    t.end()
   });
 });
 
@@ -81,9 +79,7 @@ tap.test('crawl org members /orgs/SafeLives/people (3?)', function (t) {
       require('./fixtures/make-fixture')('members.json', data);
       // console.log(data);
       t.equal(data.entries.length, 3, '/orgs/SafeLives/people has 3 people.');
-      db.end(() => {
-        t.end()
-      }); // close connection to database
+      t.end()
     });
   });
 });
@@ -106,9 +102,15 @@ tap.test('crawl /dwylbot/following (expect 1)', function (t) {
       require('./fixtures/make-fixture')('following.json', data);
       console.log(data);
       t.equal(data.entries.length, 1, '/dwylbot/following is following Simon.');
-      db.end(() => {
-        t.end()
-      }); // close connection to database
+      t.end()
     });
+  });
+});
+
+tap.test('db.end() close database connection so tests can finish', function(t) {
+  db.end(function(err, data) {
+    t.equal(db.PG_CLIENT._ending, true,
+        'db.PG_CLIENT._ending: ' + db.PG_CLIENT._ending);
+    t.end();
   });
 });
