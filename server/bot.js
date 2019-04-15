@@ -25,6 +25,9 @@ function fetch (path, callback) {
       case 'people':
         fetch_list_of_profiles_slowly(data, db.insert_relationship, callback);
         break;
+      case 'followers':
+        utils.exec_cb(callback, error, data);
+        break;
     }
   })
 }
