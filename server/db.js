@@ -83,8 +83,6 @@ function select_person (username, callback) {
   });
 }
 
-
-
 /**
  * insert_org saves an org's data to the orgs table.
  *
@@ -100,6 +98,22 @@ function insert_org (data, callback) {
     PG_CLIENT.query(query, values, function(error, result) {
       utils.log_error(error, data, new Error().stack);
       return insert_next_page (data, callback);
+    });
+  });
+}
+
+/**
+ * select_org retrieves the org for a given url.
+ * @param {string} url - url of the repo (e.g: /dwyl)
+ * @param {function} callback - callback function to be executed on success.
+ */
+function select_org (url, callback) {
+  connect( function select_repo_after_connected () {
+    const query = `SELECT * FROM orgs WHERE url = $1 ORDER BY id ASC LIMIT 1`;
+    console.log(query, url);
+    PG_CLIENT.query(query, [url], function(error, result) {
+      utils.log_error(error, result, new Error().stack);
+      return utils.exec_cb(callback, error, result);
     });
   });
 }
@@ -127,7 +141,7 @@ function insert_repo (data, callback) {
 }
 
 /**
- * select_repo saves the list of people who have starred a repo to "stars".
+ * select_repo retrieves the repo for a given url.
  * @param {string} url - url of the repo (e.g: /dwyl/start-here)
  * @param {function} callback - callback function to be executed on success.
  */
@@ -148,20 +162,20 @@ function select_repo (url, callback) {
  * @param {function} callback - callback function to be executed on success.
  */
 function insert_relationship (data, callback) {
-  select_repo(data.url, function (error, result) {
-    const repo_id = result.rows[0].id;
-    // console.log('repo_id:', repo_id);
-    let len = data.entries.length - 1;
+  let fields;
+  let rel_id; // e.g: repo_id, org_id, leader_id use one depending on data.type
+  const len = data.entries.length - 1;
+
+  function insert_rows () { // inner function has access to outer variables
     data.entries.forEach((p, i) => { // poor person's "async parallel":
       const username = p.username;
       // console.log('username:', username);
       select_person(username, function(error1, result1) {
         // console.log('L251 > result1: ', result1.rows[0]);
         const person_id = result1.rows[0].id;
-        const query = `INSERT INTO relationships
-        (person_id, repo_id)
-        VALUES ($1, $2)`
-        const values = [person_id, repo_id];
+        const query = `INSERT INTO relationships (${fields}) VALUES ($1, $2)`
+        const values = [person_id, rel_id];
+        // console.log('query:', query, 'values:', values);
         PG_CLIENT.query(query, values, function(error2, result2) {
           utils.log_error(error2, result2, new Error().stack);
 
@@ -170,8 +184,28 @@ function insert_relationship (data, callback) {
           }
         });
       });
-    });
-  });
+    }); // END data.entries.forEach
+  }
+  // there are three types of relationships, we switch based on data.type
+  switch (data.type) {
+    case 'stars':
+      fields = 'person_id, repo_id';
+      select_repo(data.url, function (error, result) {
+        rel_id = result.rows[0].id;
+        insert_rows();
+      }); // END select_repo
+      break;
+    case 'people': // this is a list of members of an organisation
+      fields = 'person_id, org_id';
+      // console.log('data.url:', data.url);
+      const url =  '/' + data.url.split('/')[2];// /orgs/dwyl/people > /dwyl
+      select_org(url, function (error, result) {
+        rel_id = result.rows[0].id;
+        insert_rows();
+      }); // END select_repo
+      // utils.exec_cb(callback, error, data);
+      break;
+  }
 }
 
 /**
@@ -189,6 +223,13 @@ function insert_log_item (path, next_page, callback) {
       return utils.exec_cb(callback, error, data);
     });
   });
+}
+
+function profile_next_page(urls, username) {
+  urls.push(username + '/followers');
+  urls.push(username + '/following');
+  urls.push(username + '?tab=repositories');
+  return urls;
 }
 
 /**
@@ -209,15 +250,17 @@ function insert_next_page (data, callback) {
       urls = data.pinned.map((e) => e.url);
       const orgs = Object.keys(data.orgs);
       orgs.forEach(org => urls.push(org));
-      urls.push(data.url + '/followers');
-      urls.push(data.url + '/following');
-      urls.push(data.url + '?tab=repositories');
+      urls = profile_next_page(urls, data.username);
       break;
     case 'repo':
       urls.push(data.url + '/stargazers');
       break;
     case 'stars':
       urls.push(data.next_page);
+      data.entries.forEach((e) => { urls = profile_next_page(urls, e.username)})
+      break;
+    case 'people':
+      data.entries.forEach((e) => { urls = profile_next_page(urls, e.username)})
       break;
   }
   let len = urls.length;
@@ -263,6 +306,7 @@ module.exports = {
   insert_person: insert_person,
   select_person: select_person,
   insert_org: insert_org,
+  select_org: select_org,
   insert_repo: insert_repo,
   select_repo: select_repo,
   insert_relationship: insert_relationship,

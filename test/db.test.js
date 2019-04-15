@@ -71,13 +71,29 @@ tap.test('select_repo', function(t) {
 
 tap.test('insert_relationship', function(t) {
   const stars = require('./fixtures/stargazers.json');
-  db.insert_relationship(stars, function (err, result) {
-    // console.log(err, result);
+  db.insert_relationship(stars, function (err0, result0) { // insert all "stars"
 
-    // db.select_repo(repo.url, function (err1, result1) {
-      // t.equal(result1.rows[0].url, repo.url, 'repo.url ' + repo.url);
-      t.end();
-    // });
+    const repo_url = stars.url.replace('/stargazers', ''); // e.g: /dwyl/health
+
+    db.select_repo(repo_url, function (err1, data1) {
+
+      const repo_id = data1.rows[0].id;
+      console.log('repo_id:', repo_id);
+      const username = stars.entries[0].username; // e.g: SimonLab
+      console.log('username:', username);
+
+      db.select_person(username, function (err2, data2) {
+        const person_id = data2.rows[0].id;
+        const select = `SELECT * FROM relationships
+          WHERE person_id = $1 AND repo_id = $2
+          ORDER by inserted_at DESC LIMIT 1`;
+
+        db.PG_CLIENT.query(select, [person_id, repo_id], function(err, result) {
+          t.equal(result.rowCount, 1, '"stars" relationship inserted');
+          t.end();
+        });
+      });
+    });
   });
 });
 

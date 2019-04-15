@@ -66,18 +66,24 @@ tap.test('crawl dwyl/health', function (t) {
   // }); // end TRUNCATE
 });
 
-
 tap.test('crawl /dwyl/health/stargazers', function (t) {
-  // db.PG_CLIENT.query('TRUNCATE TABLE repos CASCADE', function (err0, result0) {
-  //   t.equal(err0, null, 'no error running "TRUNCATE TABLE repos"');
-  //   t.equal(result0.command, 'TRUNCATE', 'repos table successfully truncated');
+  bot.fetch('/dwyl/health/stargazers', function(err, data) {
+    require('./fixtures/make-fixture')('stargazers.json', data);
+    db.end(() => {
+      t.end()
+    }); // close connection to database
+  });
+});
 
-    bot.fetch('/dwyl/health/stargazers', function(err, data) {
-      require('./fixtures/make-fixture')('stargazers.json', data);
+tap.test('crawl org members /orgs/SafeLives/people (3?)', function (t) {
+  bot.fetch('/SafeLives', function(err1, data1) { // first store the org
+    bot.fetch('/orgs/SafeLives/people', function(err, data) {
+      require('./fixtures/make-fixture')('members.json', data);
+      // console.log(data);
+      t.equal(data.entries.length, 3, '/orgs/SafeLives/people has 3 people.');
       db.end(() => {
         t.end()
       }); // close connection to database
     });
-
-  // }); // end TRUNCATE
+  });
 });
