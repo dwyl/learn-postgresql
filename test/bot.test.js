@@ -69,9 +69,9 @@ tap.test('crawl dwyl/health', function (t) {
 tap.test('crawl /dwyl/health/stargazers', function (t) {
   bot.fetch('/dwyl/health/stargazers', function(err, data) {
     require('./fixtures/make-fixture')('stargazers.json', data);
-    db.end(() => {
+    // db.end(() => {
       t.end()
-    }); // close connection to database
+    // }); // close connection to database
   });
 });
 
