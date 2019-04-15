@@ -69,9 +69,9 @@ tap.test('select_repo', function(t) {
   });
 });
 
-tap.test('insert_relationship', function(t) {
+tap.test('insert_relationships', function(t) {
   const stars = require('./fixtures/stargazers.json');
-  db.insert_relationship(stars, function (err0, result0) { // insert all "stars"
+  db.insert_relationships(stars, function (err0, result0) { // insert all "stars"
 
     const repo_url = stars.url.replace('/stargazers', ''); // e.g: /dwyl/health
 
