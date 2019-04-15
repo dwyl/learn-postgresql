@@ -161,9 +161,8 @@ function select_repo (url, callback) {
  * @param {object} data - a valid JSON object containing data to be inserted.
  * @param {function} callback - callback function to be executed on success.
  */
-function insert_relationship (data, callback) {
-  let fields;
-  let rel_id; // e.g: repo_id, org_id, leader_id use one depending on data.type
+function insert_relationships (data, callback) {
+  let fields, rel_id, url, username;
   const len = data.entries.length - 1;
 
   function insert_rows () { // inner function has access to outer variables
@@ -197,13 +196,31 @@ function insert_relationship (data, callback) {
       break;
     case 'people': // this is a list of members of an organisation
       fields = 'person_id, org_id';
-      // console.log('data.url:', data.url);
-      const url =  '/' + data.url.split('/')[2];// /orgs/dwyl/people > /dwyl
+      url =  '/' + data.url.split('/')[2];// /orgs/dwyl/people > /dwyl
       select_org(url, function (error, result) {
         rel_id = result.rows[0].id;
         insert_rows();
-      }); // END select_repo
-      // utils.exec_cb(callback, error, data);
+      }); // END select_org
+      break;
+    case 'followers': // this is a list of followers/following
+      fields = 'person_id, leader_id';
+      username =  data.url.split('/')[1]; // /dwylbot/followers > dwylbot
+      console.log('username', username);
+      // list of followers:
+      select_person(username, function (error, result) {
+        rel_id = result.rows[0].id;
+        insert_rows();
+      }); // END select_org
+      break;
+    case 'following': // pay attention to the subtle difference in fields order
+      fields = 'leader_id, person_id';
+      username =  data.url.split('/')[1]; // /dwylbot/following > dwylbot
+      console.log('username', username);
+      // list of followers:
+      select_person(username, function (error, result) {
+        rel_id = result.rows[0].id;
+        insert_rows();
+      }); // END select_org
       break;
   }
 }
@@ -255,11 +272,11 @@ function insert_next_page (data, callback) {
     case 'repo':
       urls.push(data.url + '/stargazers');
       break;
+    case 'followers':
+    case 'following':
+    case 'people':
     case 'stars':
       urls.push(data.next_page);
-      data.entries.forEach((e) => { urls = profile_next_page(urls, e.username)})
-      break;
-    case 'people':
       data.entries.forEach((e) => { urls = profile_next_page(urls, e.username)})
       break;
   }
@@ -309,6 +326,6 @@ module.exports = {
   select_org: select_org,
   insert_repo: insert_repo,
   select_repo: select_repo,
-  insert_relationship: insert_relationship,
+  insert_relationships: insert_relationships,
   PG_CLIENT: PG_CLIENT
 }

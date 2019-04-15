@@ -8,7 +8,7 @@ function fetch (path, callback) {
       utils.log_error(error, data, new Error().stack); // get exact stack trace.
       return utils.exec_cb(callback, error, data);
     }
-    console.log('data.type:', data.type, ' | data.name:', data.name);
+    console.log('data.type:', data.type);
     switch (data.type) {
       case 'org':
         db.insert_org(data, callback);
@@ -19,17 +19,14 @@ function fetch (path, callback) {
       case 'repo':
         db.insert_repo(data, callback);
         break;
-      case 'stars':
-        fetch_list_of_profiles_slowly(data, db.insert_relationship, callback);
-        break;
+      case 'followers': // multiple cases same outcome.
+      case 'following':
       case 'people':
-        fetch_list_of_profiles_slowly(data, db.insert_relationship, callback);
-        break;
-      case 'followers':
-        utils.exec_cb(callback, error, data);
+      case 'stars':
+        fetch_list_of_profiles_slowly(data, callback);
         break;
     }
-  })
+  });
 }
 
 /**
@@ -39,7 +36,7 @@ function fetch (path, callback) {
  * @param {function} next - the function executed once profiles are saved.
  * @param {function} callback - the callback function to be executed if any.
  */
-function fetch_list_of_profiles_slowly (data, next, callback) {
+function fetch_list_of_profiles_slowly (data, callback) {
   const len = data.entries.length;
 
   data.entries.forEach((u, i) => { // poor person's "async parallel":
@@ -51,8 +48,8 @@ function fetch_list_of_profiles_slowly (data, next, callback) {
 
         db.insert_person(profile, function (err2, data2) {
 
-          if (i == len - 1) {
-            return next(data, callback); // only called once per batch.
+          if (i == len - 1) { // only insert relationships once people records
+            return db.insert_relationships(data, callback); // once per batch.
           }  // e.g: db.insert_stars(data, callback) in the case of 'stars' page
         });
       });
