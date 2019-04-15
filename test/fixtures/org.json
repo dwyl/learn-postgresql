@@ -15,7 +15,14 @@
       "lang": "",
       "url": "/dwyl/learn-postgresql",
       "description": "🐘 Learn how to use PostgreSQL and Structured Query Language (SQL) to store and query your relational data. 🔍",
-      "updated": "2019-04-15T10:27:30Z"
+      "updated": "2019-04-15T12:35:11Z"
+    },
+    {
+      "name": "learn-json-web-tokens",
+      "lang": "JavaScript",
+      "url": "/dwyl/learn-json-web-tokens",
+      "description": "🔐 Learn how to use JSON Web Token (JWT) to secure your next Web App! (Tutorial/Example with Tests!!)",
+      "updated": "2019-04-15T10:42:01Z"
     },
     {
       "name": "learn-hapi",
@@ -23,13 +30,6 @@
       "url": "/dwyl/learn-hapi",
       "description": "☀️ Learn to use Hapi.js (Node.js) web framework to build scalable apps in less time",
       "updated": "2019-04-13T14:23:26Z"
-    },
-    {
-      "name": "learn-json-web-tokens",
-      "lang": "JavaScript",
-      "url": "/dwyl/learn-json-web-tokens",
-      "description": "🔐 Learn how to use JSON Web Token (JWT) to secure your next Web App! (Tutorial/Example with Tests!!)",
-      "updated": "2019-04-12T19:27:47Z"
     },
     {
       "name": "aws-sdk-mock",

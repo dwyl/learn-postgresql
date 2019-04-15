@@ -168,7 +168,7 @@ function insert_relationships (data, callback) {
   function insert_rows () { // inner function has access to outer variables
     data.entries.forEach((p, i) => { // poor person's "async parallel":
       const username = p.username;
-      // console.log('username:', username);
+      console.log('username:', username);
       select_person(username, function(error1, result1) {
         // console.log('L251 > result1: ', result1.rows[0]);
         const person_id = result1.rows[0].id;

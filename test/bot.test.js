@@ -88,7 +88,7 @@ tap.test('crawl /dwylbot/followers (expect 1)', function (t) {
   bot.fetch('/dwylbot', function(err1, data1) { // first fetch the profile
     bot.fetch('/dwylbot/followers', function(err, data) {
       require('./fixtures/make-fixture')('followers.json', data);
-      console.log(data);
+      // console.log(data);
       t.equal(data.entries.length, 4, '/dwylbot/following is following Simon.');
       t.end()
     });
@@ -100,7 +100,7 @@ tap.test('crawl /dwylbot/following (expect 1)', function (t) {
   bot.fetch('/dwylbot', function(err1, data1) { // first fetch the profile
     bot.fetch('/dwylbot/following', function(err, data) {
       require('./fixtures/make-fixture')('following.json', data);
-      console.log(data);
+      // console.log(data);
       t.equal(data.entries.length, 1, '/dwylbot/following is following Simon.');
       t.end()
     });
