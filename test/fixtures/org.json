@@ -1,0 +1,225 @@
+{
+  "url": "/dwyl",
+  "type": "org",
+  "name": "dwyl",
+  "description": "Start here: https://github.com/dwyl/start-here",
+  "location": "London, UK",
+  "website": "https://dwyl.com",
+  "email": "hello+github@dwyl.com",
+  "pcount": 171,
+  "avatar": "https://avatars1.githubusercontent.com/u/11708465?s=200&v=4",
+  "uid": 11708465,
+  "entries": [
+    {
+      "name": "learn-postgresql",
+      "lang": "",
+      "url": "/dwyl/learn-postgresql",
+      "description": "🐘 Learn how to use PostgreSQL and Structured Query Language (SQL) to store and query your relational data. 🔍",
+      "updated": "2019-04-15T13:09:30Z"
+    },
+    {
+      "name": "learn-json-web-tokens",
+      "lang": "JavaScript",
+      "url": "/dwyl/learn-json-web-tokens",
+      "description": "🔐 Learn how to use JSON Web Token (JWT) to secure your next Web App! (Tutorial/Example with Tests!!)",
+      "updated": "2019-04-15T10:42:01Z"
+    },
+    {
+      "name": "learn-hapi",
+      "lang": "HTML",
+      "url": "/dwyl/learn-hapi",
+      "description": "☀️ Learn to use Hapi.js (Node.js) web framework to build scalable apps in less time",
+      "updated": "2019-04-13T14:23:26Z"
+    },
+    {
+      "name": "aws-sdk-mock",
+      "lang": "JavaScript",
+      "url": "/dwyl/aws-sdk-mock",
+      "description": "🌈 AWSomocks for Javascript/Node.js aws-sdk tested, documented & maintained. Contributions welcome!",
+      "updated": "2019-04-12T08:36:15Z"
+    },
+    {
+      "name": "learn-elixir",
+      "lang": "Elixir",
+      "url": "/dwyl/learn-elixir",
+      "description": "💧 Learn the Elixir programming language to build functional, fast, scalable and maintainable web applications!",
+      "updated": "2019-04-08T07:58:17Z"
+    },
+    {
+      "name": "hapi-error",
+      "lang": "JavaScript",
+      "url": "/dwyl/hapi-error",
+      "description": "☔️ Intercept errors in your Hapi Web App/API and send a *useful* message to the client OR redirect to the desired endpoint.",
+      "updated": "2019-04-07T12:52:07Z"
+    },
+    {
+      "name": "home",
+      "lang": "",
+      "url": "/dwyl/home",
+      "description": "🏡 👩‍💻 💡 home is where you can [learn to] build the future surrounded by like-minded creative, friendly and [intrinsically] motivated people focussed on health, fitness and making things people and the world need!",
+      "updated": "2019-03-30T22:05:51Z"
+    },
+    {
+      "name": "elixir-dojo",
+      "lang": "Elixir",
+      "url": "/dwyl/elixir-dojo",
+      "description": "Identify card hands",
+      "updated": "2019-03-30T18:58:53Z"
+    },
+    {
+      "name": "learn-tape",
+      "lang": "JavaScript",
+      "url": "/dwyl/learn-tape",
+      "description": "✅ Learn how to use Tape for JavaScript/Node.js Test Driven Development (TDD) - Ten-Minute Testing Tutorial",
+      "updated": "2019-03-30T13:31:23Z"
+    },
+    {
+      "name": "learn-travis",
+      "lang": "JavaScript",
+      "url": "/dwyl/learn-travis",
+      "description": "😎 A quick Travis CI (Continuous Integration) Tutorial for Node.js developers",
+      "updated": "2019-03-30T13:15:15Z"
+    },
+    {
+      "name": "ordem",
+      "lang": "JavaScript",
+      "url": "/dwyl/ordem",
+      "description": "🏁 ultra-simple ordered task runner for Node.js and Browser. Run your asynchronous functions predictably in series.",
+      "updated": "2019-03-29T20:26:27Z"
+    },
+    {
+      "name": "learn-elm-architecture-in-javascript",
+      "lang": "JavaScript",
+      "url": "/dwyl/learn-elm-architecture-in-javascript",
+      "description": "🦄 Learn how to build web apps using the Elm Architecture in \"vanilla\" JavaScript (step-by-step TDD tutorial)!",
+      "updated": "2019-03-29T09:20:26Z"
+    },
+    {
+      "name": "todo-list-javascript-tutorial",
+      "lang": "JavaScript",
+      "url": "/dwyl/todo-list-javascript-tutorial",
+      "description": "✅ A step-by-step complete beginner example/tutorial for building a Todo List App (TodoMVC) from scratch in JavaScript following Test Driven Development (TDD) best practice. 🌱",
+      "updated": "2019-03-28T21:13:46Z"
+    },
+    {
+      "name": "process-handbook",
+      "lang": "",
+      "url": "/dwyl/process-handbook",
+      "description": "📗 Contains our processes, questions and journey to creating ateam",
+      "updated": "2019-03-27T21:49:19Z"
+    },
+    {
+      "name": "auth",
+      "lang": "Elixir",
+      "url": "/dwyl/auth",
+      "description": "🚪 🔐 A Complete Authentication Solution for Elixir/Phoenix Web Apps/APIs (Documented, Tested & Maintained)",
+      "updated": "2019-03-26T11:50:37Z"
+    },
+    {
+      "name": "learn-phoenix-framework",
+      "lang": "Elixir",
+      "url": "/dwyl/learn-phoenix-framework",
+      "description": "🔥 Phoenix is the web framework without compromise on speed, reliability or maintainability! Don't settle for less. 🚀",
+      "updated": "2019-03-26T11:49:30Z"
+    },
+    {
+      "name": "phoenix-ecto-append-only-log-example",
+      "lang": "Elixir",
+      "url": "/dwyl/phoenix-ecto-append-only-log-example",
+      "description": "📝 A step-by-step example/tutorial showing how to build a Phoenix (Elixir) App where all data is immutable (append only). Precursor to Blockchain, IPFS or Solid!",
+      "updated": "2019-03-25T05:50:07Z"
+    },
+    {
+      "name": "hapi-auth-jwt2",
+      "lang": "JavaScript",
+      "url": "/dwyl/hapi-auth-jwt2",
+      "description": "🔒 Secure Hapi.js authentication plugin using JSON Web Tokens (JWT) in Headers, Query or Cookies",
+      "updated": "2019-03-24T19:51:17Z"
+    },
+    {
+      "name": "learn-docker",
+      "lang": "Dockerfile",
+      "url": "/dwyl/learn-docker",
+      "description": "🚢 Learn how to use docker.io containers to consistently deploy your apps on any infrastructure.",
+      "updated": "2019-03-21T12:12:23Z"
+    },
+    {
+      "name": "sendemail",
+      "lang": "JavaScript",
+      "url": "/dwyl/sendemail",
+      "description": "✉️ Simplifies reliably sending emails from your node.js apps using AWS Simple Email Service (SES)",
+      "updated": "2019-03-20T15:35:36Z"
+    },
+    {
+      "name": "learn-heroku",
+      "lang": "HTML",
+      "url": "/dwyl/learn-heroku",
+      "description": "🏁 Learn how to deploy your web application to Heroku from scratch step-by-step in 7 minutes!",
+      "updated": "2019-03-14T11:37:37Z"
+    },
+    {
+      "name": "learn-wireframing",
+      "lang": "",
+      "url": "/dwyl/learn-wireframing",
+      "description": "💡 📰 Learn how to share your UX ideas with your team and the world so you can test hypotheses fast!",
+      "updated": "2019-03-13T20:44:36Z"
+    },
+    {
+      "name": "english-words",
+      "lang": "Python",
+      "url": "/dwyl/english-words",
+      "description": "📝 A text file containing 479k English words for all your dictionary/word-based projects e.g: auto-completion / autosuggestion",
+      "updated": "2019-03-13T20:35:44Z"
+    },
+    {
+      "name": "alog",
+      "lang": "Elixir",
+      "url": "/dwyl/alog",
+      "description": "🌲 alog (Append-only Log) is an easy way to start using the Lambda/Kappa architecture in your Elixir/Phoenix Apps while still using PostgreSQL (with Ecto).",
+      "updated": "2019-03-13T11:06:36Z"
+    },
+    {
+      "name": "phoenix-uk-postcode-finder-example",
+      "lang": "Elixir",
+      "url": "/dwyl/phoenix-uk-postcode-finder-example",
+      "description": "📍An example/tutorial application showing how to rapidly find your nearest X by typing your postcode.",
+      "updated": "2019-03-12T21:40:10Z"
+    },
+    {
+      "name": "learn-elm",
+      "lang": "HTML",
+      "url": "/dwyl/learn-elm",
+      "description": "🌈 discover why people are switching to Elm and how you can get started today!",
+      "updated": "2019-03-11T13:58:23Z"
+    },
+    {
+      "name": "technical-glossary",
+      "lang": "",
+      "url": "/dwyl/technical-glossary",
+      "description": "📝 A technical glossary for key words and terms to help anyone learn and understand concepts and prepare for a career as a creative technologist! 😕 > 🤔 > 💡 > 😊 🎉 🚀",
+      "updated": "2019-03-08T14:48:31Z"
+    },
+    {
+      "name": "learn-purescript",
+      "lang": "",
+      "url": "/dwyl/learn-purescript",
+      "description": "🚧 Learn to use Purescript to make your JavaScript Apps more reliable.",
+      "updated": "2019-03-08T14:35:47Z"
+    },
+    {
+      "name": "goodparts",
+      "lang": "JavaScript",
+      "url": "/dwyl/goodparts",
+      "description": "🙈 An ESLint Style that only allows JavaScript the Good Parts (and \"Better Parts\") in your code.",
+      "updated": "2019-03-06T14:45:23Z"
+    },
+    {
+      "name": "product-owner-guide",
+      "lang": "",
+      "url": "/dwyl/product-owner-guide",
+      "description": "🚀 A rough guide for people working with dwyl as Product Owners",
+      "updated": "2019-03-05T15:01:05Z"
+    }
+  ],
+  "next_page": "/dwyl?page=2"
+}

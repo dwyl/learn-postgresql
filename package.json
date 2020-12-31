@@ -1,0 +1,70 @@
+{
+  "name": "learn-postgresql",
+  "version": "1.0.0",
+  "description": "PostgreSQL Tutorial",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "drop": "psql -U postgres -c 'DROP DATABASE IF EXISTS codeface;'",
+    "create": "psql -U postgres -c 'CREATE DATABASE codeface;'",
+    "schema": "psql -U postgres -d codeface -a -f schema.sql",
+    "recreate": "npm run drop && npm run create && npm run schema",
+    "test": "nyc tap ./test/*.test.js | tap-nyc",
+    "quick": "tap ./test/*.test.js",
+    "start": "node server/server.js",
+    "faster": "./node_modules/faster/bin/faster.js",
+    "postinstall": "npm run recreate",
+    "open-cov": "open ./coverage/lcov-report/index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dwyl/learn-postgresql.git"
+  },
+  "keywords": [
+    "PostgreSQL",
+    "Postgres",
+    "Beginners",
+    "Tutorial"
+  ],
+  "author": "dwyl & friends",
+  "license": "GPL-2.0",
+  "bugs": {
+    "url": "https://github.com/dwyl/learn-postgresql/issues"
+  },
+  "homepage": "https://github.com/dwyl/learn-postgresql#readme",
+  "dependencies": {
+    "github-scraper": "^6.7.0",
+    "pg": "^7.8.1"
+  },
+  "devDependencies": {
+    "faster": "^3.5.1",
+    "nyc": "^13.1.0",
+    "supertest": "^4.0.2",
+    "tap": "^12.6.1",
+    "tap-nyc": "^1.0.3"
+  },
+  "nyc": {
+    "check-coverage": true,
+    "lines": 100,
+    "statements": 100,
+    "functions": 100,
+    "branches": 100,
+    "include": [
+      "server/*.js"
+    ],
+    "exclude": [
+      "test/*.test.js"
+    ],
+    "reporter": [
+      "lcov",
+      "text-summary"
+    ],
+    "cacheDirectories": [
+      "node_modules"
+    ],
+    "all": true,
+    "report-dir": "./coverage"
+  }
+}

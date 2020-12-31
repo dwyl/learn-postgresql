@@ -1,0 +1,11 @@
+language: node_js
+node_js:
+  - "node"
+env:
+  global:
+    - DATABASE_URL=postgres://postgres:@localhost/codeface
+    - NODE_ENV=TEST
+services:
+  - postgresql
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
