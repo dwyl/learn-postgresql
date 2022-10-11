@@ -218,19 +218,18 @@ click "Download":
 the PostgreSQL elephant icon into your `applications` folder. Double click the
 icon to launch the application.
 
-3. You should see a new window launched that says "Welcome to Postgres". If it
-says that it cannot connect to the postgres server this means that the DEFAULT
-port is probably already in use. Make sure you don't have any other instances of
-Postgres on your computer. Uninstall them if you do and then resume with these
-steps. Click on the button that says "Open psql":
-![open psql](https://cloud.githubusercontent.com/assets/12450298/19642044/463eceae-99db-11e6-8907-bb3a6cc532a7.png)
+3. You should now see a new window launched with a list of servers to the left side of the window (if it's a fresh install, you should see one named `PostgreSQL XX`. If it shows anything else or an error props up, make sure you don't have any other instances of Postgres on your computer and reinstall. To fully reinstall follow [these steps](https://postgresapp.com/documentation/install.html) to delete data directories and preferences. Click on the button 'Initialize' (or 'Start' if you had already installed previously).
+<img width="718" alt="download" src="https://user-images.githubusercontent.com/17494745/195095742-e6838922-b17a-495d-b922-71f1ddfcd581.png">
 
-4. Postgres.app will by default create a role and database that matches your current macOS username. You can connect straight away by running `psql`.
+4. Run `sudo mkdir -p /etc/paths.d && echo /Applications/Postgres.app/Contents/Versions/latest/bin | sudo tee /etc/paths.d/postgresapp` (found [here](https://postgresapp.com/documentation/install.html)) to use `psql` in the terminal. Close and open the terminal.
 
-5. You should then see something in your terminal that looks like this (with your macOS username in front of the prompt rather than 'postgres'):
+5. Postgres.app will by default create a role and database that matches your current macOS username. You can connect straight away by running `psql`.
+
+6. You should then see something in your terminal that looks like this (with your macOS username in front of the prompt rather than 'postgres'):
+
 ![terminal](https://cloud.githubusercontent.com/assets/12450298/19642816/f8ac0c66-99de-11e6-87e2-db55e6abc27b.png)
 
-6. You should now be all set up to start using PostgreSQL. For documentation on
+7. You should now be all set up to start using PostgreSQL. For documentation on
 command line tools etc see http://postgresapp.com/documentation/
 
 #### Ubuntu
