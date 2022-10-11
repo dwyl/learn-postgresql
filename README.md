@@ -218,10 +218,16 @@ click "Download":
 the PostgreSQL elephant icon into your `applications` folder. Double click the
 icon to launch the application.
 
-3. You should now see a new window launched with a list of servers to the left side of the window (if it's a fresh install, you should see one named `PostgreSQL XX`. If it shows anything else or an error props up, make sure you don't have any other instances of Postgres on your computer and reinstall. To fully reinstall follow [these steps](https://postgresapp.com/documentation/install.html) to delete data directories and preferences. Click on the button 'Initialize' (or 'Start' if you had already installed previously).
+3. You should now see a new window launched with a list of servers to the left side of the window 
+(if it's a fresh install, you should see one named `PostgreSQL XX`). 
+If it shows anything else or an error props up, make sure you don't have any other instances of Postgres on your computer and reinstall. 
+To fully reinstall follow [these steps](https://postgresapp.com/documentation/install.html) to delete data directories and preferences. 
+Click on the button 'Initialize' (or 'Start' if you had already installed previously).
 <img width="718" alt="download" src="https://user-images.githubusercontent.com/17494745/195095742-e6838922-b17a-495d-b922-71f1ddfcd581.png">
 
-4. Run `sudo mkdir -p /etc/paths.d && echo /Applications/Postgres.app/Contents/Versions/latest/bin | sudo tee /etc/paths.d/postgresapp` (found [here](https://postgresapp.com/documentation/install.html)) to use `psql` in the terminal. Close and open the terminal.
+4. Run `sudo mkdir -p /etc/paths.d && echo /Applications/Postgres.app/Contents/Versions/latest/bin | sudo tee /etc/paths.d/postgresapp` 
+(found [here](https://postgresapp.com/documentation/install.html)) to use `psql` in the terminal. 
+Close and open the terminal.
 
 5. Postgres.app will by default create a role and database that matches your current macOS username. You can connect straight away by running `psql`.
 
