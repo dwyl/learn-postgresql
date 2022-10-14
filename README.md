@@ -15,12 +15,12 @@ and query your data.
 <br />
 
 [![Build Status](https://img.shields.io/travis/dwyl/learn-postgresql/master.svg?style=flat-square)](https://travis-ci.org/dwyl/learn-postgresql)
-[![codecov.io](https://img.shields.io/codecov/c/github/dwyl/learn-postgresql/master.svg?style=flat-square)](http://codecov.io/github/dwyl/learn-postgresql?branch=master)
+[![codecov.io](https://img.shields.io/codecov/c/github/dwyl/learn-postgresql/master.svg?style=flat-square)](https://codecov.io/github/dwyl/learn-postgresql?branch=master)
 [![Dependencies: None!](https://david-dm.org/dwyl/learn-postgresql/status.svg?style=flat-square)](https://david-dm.org/dwyl/learn-postgresql)
 [![devDependencies Status](https://david-dm.org/dwyl/learn-postgresql/dev-status.svg?style=flat-square)](https://david-dm.org/dwyl/learn-postgresql?type=dev)
 [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat-square)](https://github.com/dwyl/learn-postgresql/issues)
 <!-- uncomment when ready
-[![HitCount](http://hits.dwyl.io/dwyl/learn-postgresql.svg)](http://hits.dwyl.io/dwyl/learn-postgresql)
+[![HitCount](https://hits.dwyl.io/dwyl/learn-postgresql.svg)](https://hits.dwyl.io/dwyl/learn-postgresql)
 -->
 
 </div>
@@ -210,7 +210,7 @@ Follow these steps to get started:
 #### MacOS
 
 1. There are a couple of ways to install PostgreSQL. One of the easier ways to
-get started is with Postgres.app. Navigate to http://postgresapp.com/ and then
+get started is with Postgres.app. Navigate to https://postgresapp.com/ and then
 click "Download":
 ![download](https://cloud.githubusercontent.com/assets/12450298/19641848/6d3cfa4a-99da-11e6-858f-3ff2ada026be.png)
 
@@ -236,7 +236,7 @@ Close and open the terminal.
 ![terminal](https://cloud.githubusercontent.com/assets/12450298/19642816/f8ac0c66-99de-11e6-87e2-db55e6abc27b.png)
 
 7. You should now be all set up to start using PostgreSQL. For documentation on
-command line tools etc see http://postgresapp.com/documentation/
+command line tools etc see https://postgresapp.com/documentation/
 
 #### Ubuntu
 
@@ -426,13 +426,13 @@ count is then performed on each of the groups.
 + Pluralsight postgres getting started:
   https://www.pluralsight.com/courses/postgresql-getting-started
 + Tech Republic Postgres setup:
-  http://www.techrepublic.com/blog/diy-it-guy/diy-a-postgresql-database-server-setup-anyone-can-handle
-+ PostGIS installation: http://postgis.net/install
-+ PostGIS docs: http://postgis.net/docs/manual-2.3
-+ PostGIS ST_Distance: http://postgis.net/docs/ST_Distance.html
+  https://www.techrepublic.com/article/diy-a-postgresql-database-server-setup-anyone-can-handle/
++ PostGIS installation: https://postgis.net/install
++ PostGIS docs: https://postgis.net/docs/manual-2.3
++ PostGIS ST_Distance: https://postgis.net/docs/ST_Distance.html
 + Foreign Key Constraints:
   + https://en.wikipedia.org/wiki/Foreign_key
-  + http://www.postgresqltutorial.com/postgresql-foreign-key
+  + https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-foreign-key/
   + https://tableplus.io/blog/2018/08/postgresql-how-to-add-a-foreign-key.html
 + Graphical Interface (GUI) tools:
 https://wiki.postgresql.org/wiki/Community_Guide_to_PostgreSQL_GUI_Tools
