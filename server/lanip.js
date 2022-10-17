@@ -1,4 +1,4 @@
-// see: http://stackoverflow.com/questions/10750303
+// see: https://stackoverflow.com/questions/10750303
 var os = require('os');
 var interfaces = os.networkInterfaces();
 var ip = [];
