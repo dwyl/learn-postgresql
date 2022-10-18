@@ -429,6 +429,7 @@ count is then performed on each of the groups.
   https://www.techrepublic.com/article/diy-a-postgresql-database-server-setup-anyone-can-handle/
 + PostGIS installation: https://postgis.net/install
 + PostGIS docs: https://postgis.net/docs/manual-2.3
++ SQl Tutorials: https://www.scaler.com/topics/sql/
 + PostGIS ST_Distance: https://postgis.net/docs/ST_Distance.html
 + Foreign Key Constraints:
   + https://en.wikipedia.org/wiki/Foreign_key
