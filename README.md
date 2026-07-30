@@ -1,24 +1,20 @@
 <div align="center">
 
-<img src="https://github.com/user-attachments/assets/faaf247b-16d8-40aa-b307-9c0a567cb351" alt="Learn Postgres intro image" />
+<img src="https://github.com/user-attachments/assets/0189074e-f835-41b7-86c0-8e75ce54ff74" alt="Learn Postgres intro image" />
 
 Learn to use **`Postgres`**
-and Structured Query Language (**SQL**) 
+and Structured Query Language (**`SQL`**) 
 to **securely store**
 and **reliably query** your data.
 
 <br />
-
-[![Build Status](https://img.shields.io/travis/dwyl/learn-postgresql/master.svg?style=flat-square)](https://travis-ci.org/dwyl/learn-postgresql)
-[![codecov.io](https://img.shields.io/codecov/c/github/dwyl/learn-postgresql/master.svg?style=flat-square)](https://codecov.io/github/dwyl/learn-postgresql?branch=master)
-[![Dependencies: None!](https://david-dm.org/dwyl/learn-postgresql/status.svg?style=flat-square)](https://david-dm.org/dwyl/learn-postgresql)
-[![devDependencies Status](https://david-dm.org/dwyl/learn-postgresql/dev-status.svg?style=flat-square)](https://david-dm.org/dwyl/learn-postgresql?type=dev)
+<!-- Update the Build Badge When its working  -->
+[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/dwyl/javascript-todo-list-tutorial/ci.yml?label=build&style=flat-square&branch=main)](https://github.com/dwyl/javascript-todo-list-tutorial/actions)
+[![codecov.io](https://img.shields.io/codecov/c/github/dwyl/learn-postgresql/master.svg?style=flat-square)](https://codecov.io/github/dwyl/learn-postgresql?branch=main)
 [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat-square)](https://github.com/dwyl/learn-postgresql/issues)
-[![HitCount](https://hits.dwyl.com/dwyl/learn-postgresql.svg)](https://hits.dwyl.io/dwyl/learn-postgresql)
-
+[![HitCount](https://hits.dwyl.com/dwyl/learn-postgresql.svg)](https://hits.dwyl.com/dwyl/learn-postgresql)
 
 </div>
-
 
 # _Why_?
 
@@ -27,13 +23,13 @@ is the essence of _all_ software applications. <br />
 
 ## SQL is _Everywhere_
 
-Like it or not, Relational Databases store
+Like it or not, **Relational Databases** store
 _most_ of the world's structured data
-and Structured Query Language (SQL)
+and Structured Query Language (`SQL`)
 is _by far_ the most frequent way of retrieving the data.<br />
 
 According to the most _recent_ surveys/statistics,
-SQL _still_ dominates the world of databases.
+`SQL` _still_ dominates the world of databases.
 
 https://insights.stackoverflow.com/survey/2018/#technology-databases
 ![stackoverflow-survey-2018-databases](https://user-images.githubusercontent.com/194400/52594468-80cb3b80-2e43-11e9-867a-eeb4eea9a322.png)
