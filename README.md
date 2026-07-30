@@ -1,16 +1,11 @@
 <div align="center">
 
-# Learn PostgreSQL
+<img src="https://github.com/user-attachments/assets/faaf247b-16d8-40aa-b307-9c0a567cb351" alt="Learn Postgres intro image" />
 
-Learn how to use PostgreSQL
-and Structured Query Language (SQL) to store
-and query your data.
-
-<br />
-
-<a href="https://www.postgresql.org/about/">
-  <img src="https://user-images.githubusercontent.com/194400/52590350-fa116100-2e38-11e9-9303-c38819493a4e.png" width="700">
-</a>
+Learn to use **`Postgres`**
+and Structured Query Language (**SQL**) 
+to **securely store**
+and **reliably query** your data.
 
 <br />
 
@@ -19,9 +14,8 @@ and query your data.
 [![Dependencies: None!](https://david-dm.org/dwyl/learn-postgresql/status.svg?style=flat-square)](https://david-dm.org/dwyl/learn-postgresql)
 [![devDependencies Status](https://david-dm.org/dwyl/learn-postgresql/dev-status.svg?style=flat-square)](https://david-dm.org/dwyl/learn-postgresql?type=dev)
 [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat-square)](https://github.com/dwyl/learn-postgresql/issues)
-<!-- uncomment when ready
-[![HitCount](https://hits.dwyl.io/dwyl/learn-postgresql.svg)](https://hits.dwyl.io/dwyl/learn-postgresql)
--->
+[![HitCount](https://hits.dwyl.com/dwyl/learn-postgresql.svg)](https://hits.dwyl.io/dwyl/learn-postgresql)
+
 
 </div>
 
