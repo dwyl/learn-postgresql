@@ -9,6 +9,7 @@ and **reliably query** your data.
 
 <br />
 <!-- Update the Build Badge When its working  -->
+
 [![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/dwyl/javascript-todo-list-tutorial/ci.yml?label=build&style=flat-square&branch=main)](https://github.com/dwyl/javascript-todo-list-tutorial/actions)
 [![codecov.io](https://img.shields.io/codecov/c/github/dwyl/learn-postgresql/master.svg?style=flat-square)](https://codecov.io/github/dwyl/learn-postgresql?branch=main)
 [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat-square)](https://github.com/dwyl/learn-postgresql/issues)
@@ -30,13 +31,16 @@ is _by far_ the most frequent way of retrieving the data.<br />
 
 According to the most _recent_ surveys/statistics,
 `SQL` _still_ dominates the world of databases.
+`PostgreSQL` _specifically_ is the most popular: 
+[survey.stackoverflow.co/2025/technology#1-databases](https://survey.stackoverflow.co/2025/technology#1-databases)
 
-https://insights.stackoverflow.com/survey/2018/#technology-databases
-![stackoverflow-survey-2018-databases](https://user-images.githubusercontent.com/194400/52594468-80cb3b80-2e43-11e9-867a-eeb4eea9a322.png)
+<img src="https://github.com/user-attachments/assets/f3b90a24-5466-4049-a872-ca7c997f09e4" />
 
 
 https://db-engines.com/en/ranking
-![dbms-ranking](https://user-images.githubusercontent.com/194400/52594416-64c79a00-2e43-11e9-8a61-02af22554802.png)
+
+<img alt="DB Engines ranking 2026" 
+  src="https://github.com/user-attachments/assets/8242d7b5-2336-4ed7-8278-1e68b3ec2fc2" />
 
 > _**Note**: you should never adopt a technology
 based on it's **current popularity**,
@@ -48,40 +52,43 @@ based on the requirements, constraints and/or availability
 (both of "skill" on your existing team or in the wider community).
 We include these stats to explain that **relational databases**
 are **still** the most widely used **by far** and so
-learning SQL skills is a very **wise investment**
-both as an **individual** and for your **team** or **organisation**._
+learning `SQL` skills is a very **wise investment**
+both as an **individual** 
+and for your **team** or **organisation**._
 
 
-## PostgreSQL is _Easy_ to Learn and it Runs _Everywhere_!
+## `PostgreSQL` is _Easy_ to Learn and it Runs _Everywhere_!
 
-Getting started with PostgreSQL is _easy_,
+Getting started with `PostgreSQL`` is _easy_,
 (_just follow the steps in this guide and try out the example queries!_) <br />
 When you are ready to _deploy_ your app, you are in safe hands,
 PostgreSQL runs _everywhere_:
 
-+ **Travis-CI** (free) Integration Testing:
-https://docs.travis-ci.com/user/database-setup/#postgresql
-+ **Heroku** PostgreSQL (_free for MVP: 10k rows_): https://www.heroku.com/postgres
 + AWS RDS Postgres (_good value + high performance_):
-https://aws.amazon.com/rds/postgresql/
-+ Google Cloud SQL: https://cloud.google.com/sql/
-+ DigitalOcean: https://www.digitalocean.com/products/managed-databases/
+[aws.amazon.com/rds/postgresql](https://aws.amazon.com/rds/postgresql/)
++ Google Cloud SQL:
+[cloud.google.com/sql](https://cloud.google.com/sql/)
++ DigitalOcean:
+[digitalocean.com/products/managed-databases](https://www.digitalocean.com/products/managed-databases/)
++ Azure:
+[azure.microsoft.com/en-us/services/postgresql](https://azure.microsoft.com/en-us/services/postgresql/)
+  + Citus:
+  https://techcrunch.com/2019/01/24/microsoft-acquires-citus-data
++ Self-managed high availability cluster: 
+[github.com/sorintlab/stolon](https://github.com/sorintlab/stolon)
 + Linode:
 https://www.linode.com/docs/databases/postgresql/create-a-highly-available-postgresql-cluster-using-patroni-and-haproxy/
-+ Azure: https://azure.microsoft.com/en-us/services/postgresql/
-  + Citus: https://techcrunch.com/2019/01/24/microsoft-acquires-citus-data
-+ Self-managed high availability cluster: https://github.com/sorintlab/stolon
 
 # _Who_?
 
-_Everyone_ building _any_ application that stores data should learn SQL.
-SQL is _ubiquitous_ in every field/industry and the sooner you learn/master it,
+_Everyone_ building _any_ application that stores data should learn `SQL`.
+`SQL` is _ubiquitous_ in every field/industry and the sooner you learn/master it,
 the higher your life-time return on time investment.
 
 Learning how to use a relational database is a foundational skill
 for all of computer science and application development.
 
-Being _proficient_ in SQL will open the door to Data Science with
+Being _proficient_ in `SQL` will open the door to Data Science with
 [SQL-on-Hadoop](https://mapr.com/why-hadoop/sql-hadoop/sql-hadoop-details/)
 [Apache Spark](https://en.wikipedia.org/wiki/Apache_Spark#Spark_SQL),
 Google [BigQuery](https://en.wikipedia.org/wiki/BigQuery),
