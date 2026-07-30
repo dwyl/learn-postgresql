@@ -69,19 +69,13 @@ Now test if that worked:
 
 ```sql
 GRANT ALL PRIVILEGES ON ALL TABLES IN DATABASE mvp TO mvp_user_2026;
-
 ```
 
-Got:
-```sh
-ERROR:  permission denied for table items
-```
-
-
-
+<!--
 ```sh
 SELECT * FROM postgres;
 ```
+-->
 
 ## What _Version_ of `Postgres` is Running?
 
@@ -100,6 +94,8 @@ PostgreSQL 14.6 (Debian 14.6-1.pgdg110+1) on x86_64-pc-linux-gnu, compiled by gc
 
 We found the following answers/pages/posts useful.
 
+- Using psql in Terminal:
+[dev.to/koshirok096/how-to-start-using-psql-in-terminal-for-beginners-2ok3](https://dev.to/koshirok096/how-to-start-using-psql-in-terminal-for-beginners-2ok3)
 - Top psql commands with examples:
 [bytebase.com/reference/postgres/how-to/top-psql-commands-with-examples](https://www.bytebase.com/reference/postgres/how-to/top-psql-commands-with-examples/)
 - Creating user, database and adding access on PostgreSQL: 
