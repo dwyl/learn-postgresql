@@ -1,3 +1,4 @@
+-- Sample Query you can run once your DB has data in it:
 SELECT
  next_page,
  COUNT (next_page) AS c
