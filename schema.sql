@@ -1,3 +1,4 @@
+-- This Schema Is Used By the /server
 CREATE TABLE IF NOT EXISTS "people" (
   "inserted_at" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	"id" SERIAL PRIMARY KEY,

@@ -7,7 +7,6 @@ and Structured Query Language (**`SQL`**)
 to **securely store**
 and **reliably query** your data.
 
-<br />
 <!-- Update the Build Badge When its working  -->
 
 [![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/dwyl/javascript-todo-list-tutorial/ci.yml?label=build&style=flat-square&branch=main)](https://github.com/dwyl/javascript-todo-list-tutorial/actions)
@@ -22,7 +21,7 @@ and **reliably query** your data.
 Helping people store, retrieve and derive insights from data
 is the essence of _all_ software applications. <br />
 
-## SQL is _Everywhere_
+## `SQL` is _Everywhere_
 
 Like it or not, **Relational Databases** store
 _most_ of the world's structured data
