@@ -129,7 +129,7 @@ like [PostGIS](https://postgis.net) for mapping applications
 and entire projects built on top of it like
 [TimescaleDB](https://www.timescale.com/)
 (_a time-series database perfect for analytics_)
-and [AgensGraph](https://bitnine.net/)
+and [AgensGraph](https://github.com/skaiworldwide-oss/agensgraph)
 (_a graph database, great for modelling networks e.g a "social graph"_).
 
 
